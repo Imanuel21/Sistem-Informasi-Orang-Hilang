@@ -1,21 +1,11 @@
 <?php
 include("connection-database.php");
-session_start();
-$_GET["username"]= $_SESSION["username"];
 $sql1 = "SELECT  *
 FROM orang_hilang e JOIN laporan d
 ON (e.No_Identitas = d.No_Identitas)";
-
-// $sql2 = "SELECT  *
-// FROM detail_laporan d JOIN informasi i
-// // ON (d.No_Informasi = i.No_Informasi)";
-// $sql2 = "SELECT * FROM laporan 
-// JOIN detail_laporan ON laporan.No_Laporan = detail_laporan.No_Laporan
-// JOIN informasi ON informasi.No_Informasi = detail_laporan.No_Informasi";
 // $sql1 = "SELECT * FROM orang_hilang";
 
 $result = $conn->query($sql1);
-// $result2 = $conn->query($sql2);
 
 
 ?>
@@ -115,29 +105,13 @@ $result = $conn->query($sql1);
                 <img src="img/save.PNG" class="save icon" alt="" />
               </div>
               <p class="likes">1,012 likes</p>
-              <?php
-                $no_laporan = $row["No_Laporan"];
-                $sql2 = "SELECT * FROM laporan 
-                JOIN detail_laporan ON laporan.No_Laporan = detail_laporan.No_Laporan
-                JOIN informasi ON informasi.No_Informasi = detail_laporan.No_Informasi 
-                JOIN users ON users.Id_user = informasi.Id_Informan WHERE laporan.No_Laporan = ".$no_laporan."";
-                $result2 = $conn->query($sql2);
-                if ($result2->num_rows > 0) {
-                  // output data of each row
-                  while($row2 = $result2->fetch_assoc()) {
-              ?>
-                  <p class="description"><span><?php echo $row2["username"]; ?></span> <?php echo $row2["Informasi"]; ?></p>
-              <?php
-                  }
-                }
-              ?>
+              <p class="description"><span>username </span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur tenetur veritatis placeat, molestiae impedit aut provident eum quo natus molestias?</p>
               <p class="post-time">2 minutes ago</p>
             </div>
             <div class="comment-wrapper">
               <img src="img/smile.PNG" class="icon" alt="" />
-              <input type="text" name ="coment" class="comment-box" placeholder="Add a comment" />
-              <a href="action-tambah-comment.php?id_user=<?php echo $_GET["username"] ;?>"><button class="comment-btn">post</button></a>
-              <!-- <button class="comment-btn">post</button> -->
+              <input type="text" class="comment-box" placeholder="Add a comment" />
+              <button class="comment-btn">post</button>
             </div>
           </div>
           </div> 

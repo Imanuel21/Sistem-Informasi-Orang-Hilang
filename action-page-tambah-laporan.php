@@ -32,7 +32,7 @@ $foto = $_FILES["foto"]['name'];
               // mysqli_query($koneksi,"insert into tb_gambar (gambar) values ('$image')");
               $sql1 = "INSERT INTO orang_hilang(No_Identitas, Nama, Alamat, Tanggal_Lahir, Ciri_ciri, Pekerjaan, Agama, Foto, Status, Deskripsi) VALUES ('".$nik."','".$nama."','".$alamat."','".$ttl."','".$ciri."','".$pekerjaan."','".$agama."','".$image."','".$status."','".$deskripsi."')";
               if ($conn->query($sql1) === TRUE) {
-                echo '<script language="javascript">alert("Kaporan anda berhasil ditambahkan, silahkan tunggu laporan diverivikasi");</script>';
+                echo '<script language="javascript">alert("Laporan anda berhasil ditambahkan, silahkan tunggu laporan diverivikasi");</script>';
                 echo "<script>document.location = 'main-page-login.php'</script>";
               } else {
                 echo '<script language="javascript">alert("Laporan anda gagal ditambahkan");</script>';

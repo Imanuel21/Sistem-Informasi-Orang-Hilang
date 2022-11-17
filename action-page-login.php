@@ -1,8 +1,11 @@
 <?php
 include("connection-database.php");
-
+session_start();
 $user = $_GET["username"];
 $pass = $_GET["password"];
+session_start();
+$_SESSION["username"] = $user;
+header("Location: main-page.php");
 
 $sql1 = "SELECT username, password FROM `users` WHERE username = '".$user."' AND password ='".$pass."'";
 
