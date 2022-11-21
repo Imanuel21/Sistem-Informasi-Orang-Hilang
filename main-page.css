@@ -324,11 +324,13 @@ body {
 }
 
 .comment-box {
-  width: 80%;
+  /* width: 80%; */
   height: 100%;
   border: none;
   outline: none;
   font-size: 14px;
+  margin-right: 18rem;
+  margin-bottom: 1px;
 }
 
 .comment-btn,
@@ -343,6 +345,7 @@ body {
   color: rgb(0, 162, 255);
   opacity: 0.5;
   z-index: 1;
+  cursor: pointer;
 }
 
 .reaction-wrapper {

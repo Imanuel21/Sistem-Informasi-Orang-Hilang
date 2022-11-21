@@ -1,5 +1,7 @@
 <!-- HARUS PAKAI SECTION SUPAYA BISA NGAMBIL DATA USER -->
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +21,7 @@
         box-sizing: border-box;
       }
       body {
-        background-color: #080710;
+        background-color: white;
       }
       .background {
         width: 430px;
@@ -36,19 +38,19 @@
         border-radius: 50%;
       }
       .shape:first-child {
-        background: linear-gradient(#1845ad, #23a2f6);
+        background: linear-gradient(black, black);
         left: -80px;
         top: -80px;
       }
       .shape:last-child {
-        background: linear-gradient(to right, #ff512f, #f09819);
+        background: linear-gradient(to right, black, black);
         right: -30px;
         bottom: -80px;
       }
       form {
         height: 520px;
         width: 400px;
-        background-color: rgba(255, 255, 255, 0.13);
+        background-color: black;
         position: absolute;
         transform: translate(-50%, -50%);
         top: 50%;
@@ -96,8 +98,8 @@
       button {
         margin-top: 50px;
         width: 100%;
-        background-color: #ffffff;
-        color: #080710;
+        background-color: red;
+        color: blue;
         padding: 15px 0;
         font-size: 18px;
         font-weight: 600;
@@ -133,7 +135,7 @@
       <div class="shape"></div>
       <div class="shape"></div>
     </div>
-    <form action="action-page-login.php" method="GET">
+    <form action="action-page-login.php" method="POST">
       <h3>Login Here</h3>
 
       <label for="username">Username</label>
