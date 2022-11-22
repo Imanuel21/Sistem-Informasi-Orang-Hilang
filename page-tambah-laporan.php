@@ -1,3 +1,8 @@
+<?php
+session_start();
+$_SESSION["idPelapor"] = $_SESSION["idUser"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -395,7 +400,7 @@ body {
                 <input autocomplete="off" type="text" class="form-control" name="alamat" placeholder="Alamat">
             </div>
             <div class="form-group d-flex align-items-center">
-                <input autocomplete="off" type="text" class="form-control" name="ttl" placeholder="Tanggal Lahir">
+                <input autocomplete="off" type="date" data-date-format="YYYY-MMM-DD" title="Tanggal Lahir" class="form-control" name="ttl" placeholder="Tanggal Lahir">
             </div>
             <div class="form-group d-flex align-items-center">
                 <input autocomplete="off" type="text" class="form-control" name="ciri" placeholder="Ciri-ciri">
@@ -418,7 +423,7 @@ body {
             <!-- <div class="btn btn-primary mb-3" style="text-align: center;" >Daftar</div> -->
             <!-- <div class="button"> -->
                 
-                    <button class="tambah">Tambahkan</button>
+            <button class="tambah">Tambahkan</button>
                     
                     
                 
