@@ -1,15 +1,5 @@
 <?php
 
-// intinya di unggah nanti dia buat record baru di tabel laporan
-// kalau tolak buat value jadi beraoa gitu sehingga nanti codenya jika vallue sama dengan berapa maka laporannya ditolak.
-// kalau gak, ya, gak usah dibuat ke laporan baru
-
-// $sql = "SELECT pelapor FROM orang_hilang WHERE No_Identitas = ".$_GET['id_hilang']."";
-
-$t=time();
-$dateHariini = (date("Y-m-d",$t));
-// setelah unggah ke kembali ke main 
-
 //koen sudah, sekarang lanjut sisi polisi atau kalau mau bagian pemberitahuan
 include("connection-database.php");
 session_start();
@@ -17,20 +7,18 @@ $user = $_SESSION["user"];
 
 $id_user = "";
 
-$sql0 = "SELECT ID_Polisi FROM missing_person_unit WHERE Username = '".$user."'";
+$sql0 = "SELECT Id_user FROM users WHERE username = '".$user."'";
 $result0 = $conn->query($sql0);
 if ($result0->num_rows > 0) {
   // output data of each row
   while($row0 = $result0->fetch_assoc()) {
-    $id_user = $row0['ID_Polisi'];
+    $id_user = $row0['Id_user'];
   }
 }
-$_SESSION["idUser"] = $user;
+$_SESSION["idUser"] = $id_user;
 $sql1 = "SELECT  * FROM orang_hilang WHERE No_Identitas = '".$_GET["id_hilang"]."'";
-// $sql1 = "INSERT INTO `laporan`(`No_Laporan`, `ID_User`, `No_Identitas`, `ID_Polisi`, `Tanggal_Validasi`) VALUES ('[value-1]','".$sql1."','".$_GET['id_hilang']."','".$polisi."','".$dateHariini."')";
 
 $result = $conn->query($sql1);
-
 
 ?>
 <!DOCTYPE html>
@@ -76,19 +64,13 @@ $result = $conn->query($sql1);
                 <div class="tabel-content">
               <!-- <img src="img/cover 14.png" class="post-image" alt="" /> -->
               <table action="pencarian.php" method="POST" border="0" style="background-color: orange;">
-                  
-              <tr>
-                    <td rowspan="5">
+                  <tr>
+                    <td rowspan="7">
                       <!-- <img src="image_view.php?id_gambar=<?php echo $row['No_Identitas']; ?>" width="400"> -->
                       <?php
                       echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';
                       ?>
                     </td>
-                    <td>No laporan</td>
-                    <td>:</td>
-                    <td><?php echo $row["Nama"]; ?> </td>
-                    
-                  </tr><tr>
                     <td>Nama</td>
                     <td>:</td>
                     <td><?php echo $row["Nama"]; ?> </td>
@@ -110,7 +92,6 @@ $result = $conn->query($sql1);
                     <td><?php echo $row["Agama"]; ?> </td>
                   </tr>
                   <tr >
-                    <td rowspan="2"><?php echo $id_user  ;?></td>
                     <td>Alamat</td>
                     <td>:</td>
                     <td><?php echo $row["Alamat"]; ?> </td>
@@ -121,7 +102,6 @@ $result = $conn->query($sql1);
                     <td><?php echo $row["Ciri_ciri"]; ?></td>
                   </tr>
                   <tr >
-                    <td><?php echo(date("Y-m-d",$t)); ?></td>
                     <td>Deskripsi</td>
                     <td>:</td>
                     <td><?php echo $row["Deskripsi"]; ?> </td>
@@ -137,9 +117,9 @@ $result = $conn->query($sql1);
                       <input type="submit" name="submit" value="POST" class="comment-btn" />
               </form> -->
               <button>TOLAK</button>
-              <a href="action-page-unggah.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><button>UNGGAH</button></a>
+              <a href="polisi-page-unggah.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><button>TERIMA</button></a>
               
-              <a href="polisi-page-detail-notif.php"><button>KEMBALI</button></a>
+              <a href="polisi-page-notif.php"><button>KEMBALI</button></a>
               
               
             </div>

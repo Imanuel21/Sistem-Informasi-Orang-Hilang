@@ -418,12 +418,12 @@ body {
                 <input autocomplete="off" type="text" class="form-control" name="deskripsi" placeholder="Deskripsi">
             </div>
             <div class="form-group d-flex align-items-center">
-                <input autocomplete="off" type="file" class="form-control" name="foto" enctype="multipart/form-data">
+                <input autocomplete="off" type="file" class="form-control" name="myfile" enctype="multipart/form-data">
             </div>
             <!-- <div class="btn btn-primary mb-3" style="text-align: center;" >Daftar</div> -->
             <!-- <div class="button"> -->
                 
-            <button class="tambah">Tambahkan</button>
+            <button class="tambah" name="btn">Tambahkan</button>
                     
                     
                 

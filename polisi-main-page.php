@@ -1,36 +1,26 @@
 <?php
 
-// intinya di unggah nanti dia buat record baru di tabel laporan
-// kalau tolak buat value jadi beraoa gitu sehingga nanti codenya jika vallue sama dengan berapa maka laporannya ditolak.
-// kalau gak, ya, gak usah dibuat ke laporan baru
-
-// $sql = "SELECT pelapor FROM orang_hilang WHERE No_Identitas = ".$_GET['id_hilang']."";
-
-$t=time();
-$dateHariini = (date("Y-m-d",$t));
-// setelah unggah ke kembali ke main 
-
 //koen sudah, sekarang lanjut sisi polisi atau kalau mau bagian pemberitahuan
 include("connection-database.php");
 session_start();
 $user = $_SESSION["user"];
-
+$komen = "";
 $id_user = "";
 
-$sql0 = "SELECT ID_Polisi FROM missing_person_unit WHERE Username = '".$user."'";
+$sql0 = "SELECT Id_user FROM users WHERE username = '".$user."'";
 $result0 = $conn->query($sql0);
 if ($result0->num_rows > 0) {
   // output data of each row
   while($row0 = $result0->fetch_assoc()) {
-    $id_user = $row0['ID_Polisi'];
+    $id_user = $row0['Id_user'];
   }
 }
-$_SESSION["idUser"] = $user;
-$sql1 = "SELECT  * FROM orang_hilang WHERE No_Identitas = '".$_GET["id_hilang"]."'";
-// $sql1 = "INSERT INTO `laporan`(`No_Laporan`, `ID_User`, `No_Identitas`, `ID_Polisi`, `Tanggal_Validasi`) VALUES ('[value-1]','".$sql1."','".$_GET['id_hilang']."','".$polisi."','".$dateHariini."')";
+$_SESSION["idUser"] = $id_user;
+$sql1 = "SELECT  *
+FROM orang_hilang e JOIN laporan d
+ON (e.No_Identitas = d.No_Identitas)";
 
 $result = $conn->query($sql1);
-
 
 ?>
 <!DOCTYPE html>
@@ -41,6 +31,43 @@ $result = $conn->query($sql1);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main-page.css" />
     <title>ORANG HILANG</title>
+    <style>
+      .icon-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: #333333;
+  background: #dddddd;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+}
+
+.icon-button:hover {
+  cursor: pointer;
+}
+
+.icon-button:active {
+  background: #cccccc;
+}
+
+.icon-button__badge {
+  position: absolute;
+  top: -4px;
+  right: 50px;
+  width: 15px;
+  height: 15px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+    </style>
   </head>
   <body>
     <nav class="navbar">
@@ -49,8 +76,16 @@ $result = $conn->query($sql1);
         <input type="text" class="search-box" placeholder="search" />
         <div class="nav-items">
           <img src="img/home.PNG" class="icon" alt="" />
-          <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a>
-          <img src="img/notif.png" class="icon" alt="" />
+          <!-- <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a> -->
+
+          
+          <!-- <button type="button" class="icon-button"> -->
+            <a href="polisi-page-notif.php"><img src="img/notif.png" class="icon" alt="" /></a>
+            <!-- <img src="img/notif.png" class="icon" alt="" /> -->
+          <!-- <span class="material-icons">notifications</span> -->
+          <span class="icon-button__badge">1</span>
+          <!-- </button> -->
+
           <div class="icon user-profile"></div>
         </div>
       </div>
@@ -66,29 +101,23 @@ $result = $conn->query($sql1);
         <div class="left-col">
           <!-- status wrappers -->
           <div class="post">
-            <!-- <div class="info"> -->
-              <!-- <div class="user">
+            <div class="info">
+              <div class="user">
                 <div class="profile-pic"><img src="img/PForghilang.jpeg" alt="" /></div>
                 <p class="username">Web_OrangHilang</p>
               </div>
                 <img src="img/option.PNG" class="options" alt="" />
-                </div> -->
+                </div>
                 <div class="tabel-content">
               <!-- <img src="img/cover 14.png" class="post-image" alt="" /> -->
               <table action="pencarian.php" method="POST" border="0" style="background-color: orange;">
-                  
-              <tr>
-                    <td rowspan="5">
+                  <tr>
+                    <td rowspan="7">
                       <!-- <img src="image_view.php?id_gambar=<?php echo $row['No_Identitas']; ?>" width="400"> -->
                       <?php
                       echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';
                       ?>
                     </td>
-                    <td>No laporan</td>
-                    <td>:</td>
-                    <td><?php echo $row["Nama"]; ?> </td>
-                    
-                  </tr><tr>
                     <td>Nama</td>
                     <td>:</td>
                     <td><?php echo $row["Nama"]; ?> </td>
@@ -110,7 +139,6 @@ $result = $conn->query($sql1);
                     <td><?php echo $row["Agama"]; ?> </td>
                   </tr>
                   <tr >
-                    <td rowspan="2"><?php echo $id_user  ;?></td>
                     <td>Alamat</td>
                     <td>:</td>
                     <td><?php echo $row["Alamat"]; ?> </td>
@@ -121,26 +149,46 @@ $result = $conn->query($sql1);
                     <td><?php echo $row["Ciri_ciri"]; ?></td>
                   </tr>
                   <tr >
-                    <td><?php echo(date("Y-m-d",$t)); ?></td>
                     <td>Deskripsi</td>
                     <td>:</td>
                     <td><?php echo $row["Deskripsi"]; ?> </td>
                   </tr>
                   </table>
-            <!-- </div> -->
-            
-            
+            </div>
+            <div class="post-content">
+              <div class="reaction-wrapper">
                 
-                <!-- <form action="action-tambah-comment.php" method="GET">
+                <img src="img/comment.PNG" class="icon" alt="" />
+                <img src="img/send.PNG" class="icon" alt="" />
+                <img src="img/save.PNG" class="save icon" alt="" />
+              </div>
+              
+              <?php
+                $no_laporan = $row["No_Laporan"];
+                $sql2 = "SELECT * FROM laporan 
+                JOIN detail_laporan ON laporan.No_Laporan = detail_laporan.No_Laporan
+                JOIN informasi ON informasi.No_Informasi = detail_laporan.No_Informasi 
+                JOIN users ON users.Id_user = informasi.Id_Informan WHERE laporan.No_Laporan = ".$no_laporan."";
+                $result2 = $conn->query($sql2);
+                if ($result2->num_rows > 0) {
+                  // output data of each row
+                  while($row2 = $result2->fetch_assoc()) {
+              ?>
+                  <p class="description"><span><?php echo $row2["username"]; ?></span> <?php echo $row2["Informasi"]; ?></p>
+              <?php
+                  }
+                }
+              ?>
+              <p class="post-time">2 minutes ago</p>
+            </div>
+            <div class="comment-wrapper">
+              <img src="img/smile.PNG" class="icon" alt="" />
+                
+                <form action="action-tambah-comment.php" method="GET">
                       <input type="text" name="comment" class="comment-box" placeholder="Add a comment..." />
                       <input hidden type="text" name="id_laporan" class="comment-box" value="<?php echo $no_laporan;?>" />
                       <input type="submit" name="submit" value="POST" class="comment-btn" />
-              </form> -->
-              <button>TOLAK</button>
-              <a href="action-page-unggah.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><button>UNGGAH</button></a>
-              
-              <a href="polisi-page-detail-notif.php"><button>KEMBALI</button></a>
-              
+              </form>
               
             </div>
           </div>
