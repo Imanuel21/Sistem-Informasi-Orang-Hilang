@@ -6,6 +6,7 @@ session_start();
 $user = $_SESSION["user"];
 $komen = "";
 $id_user = "";
+$pelapor = "";
 
 $sql0 = "SELECT Id_user FROM users WHERE username = '".$user."'";
 $result0 = $conn->query($sql0);
@@ -18,7 +19,7 @@ if ($result0->num_rows > 0) {
 $_SESSION["idUser"] = $id_user;
 $sql1 = "SELECT  *
 FROM orang_hilang e JOIN laporan d
-ON (e.No_Identitas = d.No_Identitas)";
+ON (e.No_Identitas = d.No_Identitas) WHERE e.Status = 'Menghilang'";
 
 $result = $conn->query($sql1);
 
@@ -38,7 +39,8 @@ $result = $conn->query($sql1);
         <img src="img/logo.PNG" class="brand-img" alt="" />
         <input type="text" class="search-box" placeholder="search" />
         <div class="nav-items">
-          <img src="img/home.PNG" class="icon" alt="" />
+          <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
+          
           <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a>
           <img src="img/notif.png" class="icon" alt="" />
           <div class="icon user-profile"></div>
@@ -59,7 +61,18 @@ $result = $conn->query($sql1);
             <div class="info">
               <div class="user">
                 <div class="profile-pic"><img src="img/PForghilang.jpeg" alt="" /></div>
-                <p class="username">Web_OrangHilang</p>
+                <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
+                $result2 = $conn->query($sql3);
+                if ($result2->num_rows > 0) {
+                  // output data of each row
+                  while($row2 = $result2->fetch_assoc()) {
+                    $pelapor=$row2['username'];
+                  }
+                } else {
+                    echo "Hasil Pencarian Tidak Ada";
+                }
+                ?>
+                <p class="username"><?php echo $pelapor ;?></p>
               </div>
                 <img src="img/option.PNG" class="options" alt="" />
                 </div>

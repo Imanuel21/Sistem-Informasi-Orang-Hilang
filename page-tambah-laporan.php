@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION["idPelapor"] = $_SESSION["idUser"];
+
 ?>
 
 <!DOCTYPE html>
@@ -378,7 +379,7 @@ body {
         <img src="img/logo.PNG" class="brand-img" alt="">
         <input type="text" class="search-box" placeholder="search">
         <div class="nav-items">
-            <img src="img/home.PNG" class="icon" alt="">
+        <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
             <!-- <img src="img/messenger.PNG" class="icon" alt=""> -->
             <img src="img/add.PNG" class="icon" alt="">
             <!-- <img src="img/explore.PNG" class="icon" alt=""> -->
@@ -412,7 +413,7 @@ body {
                 <input autocomplete="off" type="text" class="form-control" name="agama" placeholder="Agama">
             </div>
             <div class="form-group d-flex align-items-center">
-                <input autocomplete="off" type="text" class="form-control" name="status" placeholder="Status">
+                <input autocomplete="off" type="text" class="form-control" name="status" value="Menghilang" placeholder="Status">
             </div>
             <div class="form-group d-flex align-items-center">
                 <input autocomplete="off" type="text" class="form-control" name="deskripsi" placeholder="Deskripsi">

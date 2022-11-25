@@ -48,8 +48,8 @@ $result = $conn->query($sql1);
         <img src="img/logo.PNG" class="brand-img" alt="" />
         <input type="text" class="search-box" placeholder="search" />
         <div class="nav-items">
-          <img src="img/home.PNG" class="icon" alt="" />
-          <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a>
+        <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
+          <!-- <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a> -->
           <img src="img/notif.png" class="icon" alt="" />
           <div class="icon user-profile"></div>
         </div>
@@ -82,11 +82,21 @@ $result = $conn->query($sql1);
                       <!-- <img src="image_view.php?id_gambar=<?php echo $row['No_Identitas']; ?>" width="400"> -->
                       <?php
                       echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';
+                      $sql2 = "SELECT * FROM `laporan` ORDER BY No_Laporan DESC LIMIT 1";
+                      $result2 = $conn->query($sql2);
+                      if ($result2->num_rows > 0) {
+                        // output data of each row
+                        while($row2 = $result2->fetch_assoc()) {
+                          $no_laporan=$row2['No_Laporan'];
+                        }
+                      } else {
+                          echo "Hasil Pencarian Tidak Ada";
+                      }
                       ?>
                     </td>
                     <td>No laporan</td>
                     <td>:</td>
-                    <td><?php echo $row["Nama"]; ?> </td>
+                    <td><?php echo $no_laporan + 1; ?> </td>
                     
                   </tr><tr>
                     <td>Nama</td>

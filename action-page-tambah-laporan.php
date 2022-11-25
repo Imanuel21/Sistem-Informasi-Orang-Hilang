@@ -1,5 +1,7 @@
 <?php
 session_start();
+$t=time();
+$dateHariini = (date("Y-m-d",$t));
 $nik = $_POST["nik"] ;
 $nama = $_POST["nama"];
 $alamat = $_POST["alamat"];
@@ -22,7 +24,7 @@ $pelapor = $_SESSION["idPelapor"];
         $dbh = new PDO('mysql:host=localhost;port=3307;dbname=orang_hilang', 'root', '');
         if (isset($_POST['btn'])) {
             $data = file_get_contents($_FILES['myfile']['tmp_name']);
-            $stmt = $dbh->prepare("INSERT INTO orang_hilang VALUES(?,?,?,?,?,?,?,?,?,'',?,?,'')");
+            $stmt = $dbh->prepare("INSERT INTO orang_hilang VALUES(?,?,?,?,?,?,?,?,?,'0',?,?,?)");
             $stmt->bindParam(1,$nik);
             $stmt->bindParam(2,$nama);
             $stmt->bindParam(3,$alamat);
@@ -34,6 +36,7 @@ $pelapor = $_SESSION["idPelapor"];
             $stmt->bindParam(9,$status);
             $stmt->bindParam(10,$deskripsi);
             $stmt->bindParam(11,$pelapor);
+            $stmt->bindParam(12,$dateHariini);
             if ($stmt->execute() ==  TRUE) {
                 echo '<script language="javascript">alert("Laporan anda berhasil ditambahkan, silahkan tunggu laporan diverivikasi");</script>';
                 echo "<script>document.location = 'main-page.php'</script>";

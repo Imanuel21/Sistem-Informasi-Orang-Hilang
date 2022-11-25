@@ -44,12 +44,20 @@ $sql2 = "INSERT INTO laporan (`No_Laporan`, `ID_User`, `No_Identitas`, `ID_Polis
 
 
 if ($conn->query($sql2) === TRUE) {
-  echo '<script language="javascript">alert("LAPORAN BERHASIL DIUNGGAH");</script>';
-  echo "<script>document.location = 'polisi-page-notif.php'</script>";
-} else {
-  echo '<script language="javascript">alert("LAPORAN GAGAL DIUNGGAH");</script>';
-  echo "<script>document.location = 'polisi-page-detail-notif.php'</script>";
-}
+  //set visible jadi 1 supaya nanti yang 0 saja yang di tampilkan
+  $sql3 = "UPDATE `orang_hilang` SET `Visible` = '1' WHERE `orang_hilang`.`No_Identitas` = '".$No_Identitas."'";
+  if ($conn->query($sql3)) {
+    echo '<script language="javascript">alert("LAPORAN BERHASIL DIUNGGAH");</script>';
+    echo "<script>document.location = 'polisi-page-notif.php'</script>";
+  }else {
+    echo '<script language="javascript">alert("LAPORAN GAGAL DIUNGGAH");</script>';
+    echo "<script>document.location = 'polisi-page-detail-notif.php'</script>";
+  }
+  
+} 
+// else {
+  
+// }
 
 
 ?>

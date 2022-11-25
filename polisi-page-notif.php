@@ -16,7 +16,7 @@ if ($result0->num_rows > 0) {
   }
 }
 $_SESSION["idUser"] = $id_user;
-$sql1 = "SELECT  * FROM orang_hilang ";
+$sql1 = "SELECT  * FROM orang_hilang WHERE Visible = '0'";
 
 $result = $conn->query($sql1);
 
@@ -36,7 +36,7 @@ $result = $conn->query($sql1);
         <img src="img/logo.PNG" class="brand-img" alt="" />
         <input type="text" class="search-box" placeholder="search" />
         <div class="nav-items">
-          <img src="img/home.PNG" class="icon" alt="" />
+        <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           <!-- <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a> -->
           <img src="img/notif.png" class="icon" alt="" />
           <div class="icon user-profile"></div>

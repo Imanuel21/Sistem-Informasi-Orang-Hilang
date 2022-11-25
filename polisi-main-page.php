@@ -18,7 +18,7 @@ if ($result0->num_rows > 0) {
 $_SESSION["idUser"] = $id_user;
 $sql1 = "SELECT  *
 FROM orang_hilang e JOIN laporan d
-ON (e.No_Identitas = d.No_Identitas)";
+ON (e.No_Identitas = d.No_Identitas) WHERE e.Status = 'Menghilang'";
 
 $result = $conn->query($sql1);
 
@@ -75,7 +75,7 @@ $result = $conn->query($sql1);
         <img src="img/logo.PNG" class="brand-img" alt="" />
         <input type="text" class="search-box" placeholder="search" />
         <div class="nav-items">
-          <img src="img/home.PNG" class="icon" alt="" />
+        <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           <!-- <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a> -->
 
           
@@ -104,7 +104,18 @@ $result = $conn->query($sql1);
             <div class="info">
               <div class="user">
                 <div class="profile-pic"><img src="img/PForghilang.jpeg" alt="" /></div>
-                <p class="username">Web_OrangHilang</p>
+                <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
+                $result2 = $conn->query($sql3);
+                if ($result2->num_rows > 0) {
+                  // output data of each row
+                  while($row2 = $result2->fetch_assoc()) {
+                    $pelapor=$row2['username'];
+                  }
+                } else {
+                    echo "Hasil Pencarian Tidak Ada";
+                }
+                ?>
+                <p class="username"><?php echo $pelapor ;?></p>
               </div>
                 <img src="img/option.PNG" class="options" alt="" />
                 </div>
@@ -157,10 +168,10 @@ $result = $conn->query($sql1);
             </div>
             <div class="post-content">
               <div class="reaction-wrapper">
+                <a href="edit-laporan.php?No_Identitas=<?php echo $row["No_Identitas"]?>"><button>Edit Laporan<img src="img/edit.png" class="icon" alt="" title="Edit laporan" /></button></a>
                 
-                <img src="img/comment.PNG" class="icon" alt="" />
-                <img src="img/send.PNG" class="icon" alt="" />
-                <img src="img/save.PNG" class="save icon" alt="" />
+                <!-- <img src="img/send.PNG" class="icon" alt="" /> -->
+                <!-- <img src="img/save.PNG" class="save icon" alt="" /> -->
               </div>
               
               <?php
@@ -181,7 +192,7 @@ $result = $conn->query($sql1);
               ?>
               <p class="post-time">2 minutes ago</p>
             </div>
-            <div class="comment-wrapper">
+            <!-- <div class="comment-wrapper">
               <img src="img/smile.PNG" class="icon" alt="" />
                 
                 <form action="action-tambah-comment.php" method="GET">
@@ -190,7 +201,7 @@ $result = $conn->query($sql1);
                       <input type="submit" name="submit" value="POST" class="comment-btn" />
               </form>
               
-            </div>
+            </div> -->
           </div>
           </div> 
       </div>
