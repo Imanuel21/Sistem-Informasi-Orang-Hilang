@@ -37,20 +37,10 @@ session_start();
         position: absolute;
         border-radius: 50%;
       }
-      .shape:first-child {
-        background: linear-gradient(black, black);
-        left: -80px;
-        top: -80px;
-      }
-      .shape:last-child {
-        background: linear-gradient(to right, black, black);
-        right: -30px;
-        bottom: -80px;
-      }
       form {
         height: 520px;
         width: 400px;
-        background-color: black;
+        background-color: white;
         position: absolute;
         transform: translate(-50%, -50%);
         top: 50%;
@@ -63,7 +53,7 @@ session_start();
       }
       form * {
         font-family: "Poppins", sans-serif;
-        color: #ffffff;
+        color: #black;
         letter-spacing: 0.5px;
         outline: none;
         border: none;
@@ -85,7 +75,7 @@ session_start();
         display: block;
         height: 50px;
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.07);
+        background-color: #DCDCDC;
         border-radius: 3px;
         padding: 0 10px;
         margin-top: 8px;
@@ -93,41 +83,19 @@ session_start();
         font-weight: 300;
       }
       ::placeholder {
-        color: #e5e5e5;
+        color: #black;
       }
       button {
         margin-top: 50px;
         width: 100%;
-        background-color: red;
-        color: blue;
+        background-color: #4169E1;
+        color: black;
         padding: 15px 0;
         font-size: 18px;
         font-weight: 600;
         border-radius: 5px;
         cursor: pointer;
-      }
-      .social {
-        margin-top: 30px;
-        display: flex;
-      }
-      .social div {
-        background: red;
-        width: 150px;
-        border-radius: 3px;
-        padding: 5px 10px 10px 5px;
-        background-color: rgba(255, 255, 255, 0.27);
-        color: #eaf0fb;
-        text-align: center;
-      }
-      .social div:hover {
-        background-color: rgba(255, 255, 255, 0.47);
-      }
-      .social .fb {
-        margin-left: 25px;
-      }
-      .social i {
-        margin-right: 4px;
-      }
+      
     </style>
   </head>
   <body>
@@ -136,18 +104,20 @@ session_start();
       <div class="shape"></div>
     </div>
     <form action="action-page-login.php" method="POST">
-      <h3>Login Here</h3>
+      <h3>Login</h3>
 
-      <label for="username">Username</label>
-      <input type="text" placeholder="Email or Phone" name="username"/>
+      
+      <input type="text" placeholder="Username, NIK" name="username"/>
 
-      <label for="password">Password</label>
-      <input type="password" placeholder="Password"  name="password" />
+      
+      <input type="password" placeholder="Kata Sandi"  name="password" />
 
-      <button>Log In</button>
-      <div class="social">
-        <div class="go"><i class="fab fa-google"></i> Google</div>
-        <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+
+
+      <button>Masuk</button>
+      <br></br>
+      <center><p>Jika belum mempunyai akun silahkan mendaftar akun dulu di bawah ini</p></center>
+      <center><a href="page-register.php">Daftar</a></center>
       </div>
     </form>
   </body>
