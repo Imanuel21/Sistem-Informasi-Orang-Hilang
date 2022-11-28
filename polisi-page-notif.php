@@ -19,6 +19,7 @@ $_SESSION["idUser"] = $id_user;
 $sql1 = "SELECT  * FROM orang_hilang WHERE Visible = '0'";
 
 $result = $conn->query($sql1);
+$count = 1;
 
 ?>
 <!DOCTYPE html>
@@ -60,7 +61,7 @@ $result = $conn->query($sql1);
                     // echo $row["pelapor"]." telah menambahkan laporan";
                   ?>
                   <div class="link">
-                  <a href="polisi-page-detail-notif.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><?php echo $row["pelapor"]." telah menambahkan laporan <br>"; ?></a>
+                  <a style="color: black;" href="polisi-page-detail-notif.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><?php echo $count.". ".$row["pelapor"]." telah menambahkan laporan <br>"; $count++; ?></a>
                   </div>
             <?php
                   }
