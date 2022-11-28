@@ -22,7 +22,7 @@
 
 body {
     min-height: 100vh;
-    background: linear-gradient(to bottom, #000428, #004683);
+    background: linear-gradient(to bottom, white, white);
 }
 
 .wrapper {
@@ -30,14 +30,13 @@ body {
     margin: 50px auto;
     padding: 20px 30px;
     min-height: 300px;
-    background-color: #ffffff27;
-    border-top: 1px solid #ffffff6e;
-    border-left: 1px solid #ffffff6e;
+    background-color: white;
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     border-radius: 15px;
 }
 
 .wrapper .h5 {
-    color: #ddd;
+    color: black;
     text-align: center;
     margin-bottom: 1.9rem;
 }
@@ -64,7 +63,7 @@ body {
 }
 
 .wrapper .form-group input::placeholder {
-    color: #ccc;
+    color: black;
 }
 
 .wrapper .form-group input:focus::placeholder {
@@ -251,20 +250,34 @@ body {
 button{
     margin-top: 10px;
     width: 100%;
-    background-color: #b4b4b433;
-    color: #FFF;
+    background-color: #4169E1;
+    color: #black;
     padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
     border: none;
     cursor: pointer;
 }
+      form * {
+        font-family: "Poppins", sans-serif;
+        color: #black;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+      }
+      form h3 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
   <div class="wrapper">
         <form action="action-page-register.php" method="GET">
-            <div class="h5 font-weight-bold text-center mb-3">Registration</div>
+        <h3>Registrasi</h3>
+        <br></br>
             <div class="form-group d-flex align-items-center">
                 <input autocomplete="off" type="text" class="form-control" name="nik" placeholder="NIK">
             </div>
@@ -284,7 +297,9 @@ button{
                 <input autocomplete="off" type="password" class="form-control" name="password" placeholder="Password">
             </div>
             <!-- <div class="btn btn-primary mb-3" style="text-align: center;" >Daftar</div> -->
-            <button>DAFTAR</button>
+            <button>Daftar</button>
+            <br></br>
+            <center><p>Pastikan anda menginput data dengan benar!</p></center>
         </form>
     </div>
   </body>

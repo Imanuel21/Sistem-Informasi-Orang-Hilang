@@ -116,10 +116,7 @@ body {
     padding: 20px 30px;
     min-height: 300px;
     background-color: #fff;
-    border-top: 1px solid #ffffff6e;
-    border-left: 1px solid #ffffff6e;
-    border-radius: 15px;
-    border: 1px solid #dfdfdf;
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
 }
 
 .wrapper .h5 {
@@ -337,7 +334,7 @@ body {
 .button{
     margin-top: 10px;
     width: 100%;
-    background-color: #b4b4b433;
+    background-color: #4169E1;
     color: #FFF;
     padding: 15px 0;
     font-size: 18px;
@@ -348,8 +345,8 @@ body {
 .kembali{
     margin-top: 40px;
     width: 150px;
-    background-color: #404258;
-    color: #FFF;
+    background-color: #4169E1;
+    color: white;
     padding: 15px 0;
     font-size: 18px;
     font-weight: 60;
@@ -361,8 +358,8 @@ body {
 .tambah{
     margin-top: 40px;
     width: 150px;
-    background-color: #404258;
-    color: #FFF;
+    background-color: #4169E1;
+    color: white;
     padding: 15px 0;
     font-size: 18px;
     font-weight: 60;
@@ -371,6 +368,19 @@ body {
     float: left;
     display: block;
  }
+ form * {
+        font-family: "Poppins", sans-serif;
+        color: black;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+      }
+      form h3 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+      }
     </style>
 </head>
 <body>
@@ -390,7 +400,8 @@ body {
 </nav>
 <div class="wrapper">
         <form action="action-page-tambah-laporan.php" method="POST" enctype="multipart/form-data">
-            <div class="h5 font-weight-bold text-center mb-3">Tambah Orang Hilang</div>
+            <h3>Tambah Orang Hilang</h3>
+            <br></br>
             <div class="form-group d-flex align-items-center">
                 <input autocomplete="off" type="text" class="form-control" name="nik" placeholder="NIK">
             </div>
