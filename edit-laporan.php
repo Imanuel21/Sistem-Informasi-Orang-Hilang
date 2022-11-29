@@ -121,7 +121,7 @@ body {
     border-top: 1px solid #ffffff6e;
     border-left: 1px solid #ffffff6e;
     border-radius: 15px;
-    border: 1px solid #dfdfdf;
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
 }
 
 .wrapper .h5 {
@@ -146,7 +146,8 @@ body {
 .wrapper .form-group .form-control {
     background: inherit;
     border: none;
-    border-radius: 0px;
+    width : 100%;
+    border-radius: 100px;
     box-shadow: none;
     color: #404258;
 }
@@ -227,14 +228,13 @@ body {
     padding: 0.3rem 1rem;
     border-radius: 20px;
     border: 1px solid #ddd;
-    background-color: inherit;
-    box-shadow: none;
-    overflow: hidden;
+    background-color: #4169E1;
+
 }
 
 .wrapper .btn.btn-primary:hover {
-    background-color: #b4b4b433;
-    color: #fff;
+    background-color: blue;
+    color: blue;
 }
 
 .wrapper .terms {
@@ -339,40 +339,27 @@ body {
 .button{
     margin-top: 10px;
     width: 100%;
-    background-color: #b4b4b433;
-    color: #FFF;
-    padding: 15px 0;
-    font-size: 18px;
+    background-color: #4169E1;
+    color: white;
+    padding: 10px 0;
+    font-size: 15px;
     font-weight: 60;
     border: none;
     cursor: pointer;
 }
-.kembali{
-    margin-top: 40px;
-    width: 150px;
-    background-color: #404258;
-    color: #FFF;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 60;
-    border: none;
-    cursor: pointer;
-    float: right;
-    display: block;
-}
-.tambah{
-    margin-top: 40px;
-    width: 150px;
-    background-color: #404258;
-    color: #FFF;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 60;
-    border: none;
-    cursor: pointer;
-    float: left;
-    display: block;
- }
+form h3 {
+        font-family: "Poppins", sans-serif;
+        color: black;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+      }
+      form h3 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+      }
     </style>
 <body>
             <?php
@@ -381,10 +368,10 @@ body {
                   while($row = $result->fetch_assoc()) {
                     // $Image=$row['Foto'];
                   ?> 
-    
     <div class="wrapper">
     <form action="action-update-laporan.php" method="POST">
-            <div class="h5 font-weight-bold text-center mb-3">Edit Laporan</div>
+            <h3>Edit Laporan</h3>
+            <br></br>
             <div class="form-group d-flex align-items-center">
                 <input autocomplete="off" type="text" class="form-control" name="No_Identitas" value="<?php echo $row['No_Identitas'];?>">
             </div>
@@ -420,7 +407,9 @@ body {
                       echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';
                       ?>
             </p>
-            <div class="btn btn-primary mb-3" style="text-align: center;" ><button>UPDATE LAPORAN</button></div>
+            <br></br>
+            <!-- <div class="button"><button>UPDATE LAPORAN</button></div> -->
+            <button class="button" name="btn">Update Laporan</button>
             <!-- <button>UPDATE LAPORAN</button> -->
     </form>
     </div>
