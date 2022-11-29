@@ -10,32 +10,29 @@
   background-color: red;
 }
 .dropdown {
-  width: 23px;
+  width: 25px;
   margin-left: 10px;
-  border-radius: 50%;
+  border-radius: 40%;
   background-image: url(img/profile-pic.png);
   background-size: cover;
-  position: absolute;
+  /* position: absolute; */
   display: inline-block;
 }
 .dropdown-child {
   display: none;
-  background-color: white;
+  background-color: black;
   min-width: 200px;
 }
 .dropdown-child a {
-  /* color: blue;
-  padding: 20px;
-  text-decoration: none;
-  display: block; */
   color: black;
-  padding: 12px 16px;
   text-decoration: none;
-  display: block;
+  /* display: block; */
   text-align: left;
+  position: absolute;
 }
 .dropdown:hover .dropdown-child {
   display: block;
+
 }
 .link {
   padding-top: 10px;

@@ -30,7 +30,7 @@ $result = $conn->query($sql1);
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main-page.css" />
+    <link rel="stylesheet" href="main-page.css">
     <title>ORANG HILANG</title>
   </head>
   <body>
@@ -47,7 +47,7 @@ $result = $conn->query($sql1);
           <div class="dropdown">
           <button class="mainmenubtn"></button>
             <div class="dropdown-child">
-                <a href="page-login.php">LOG OUT</a>
+                <a href="page-login.php">LOGOUT</a>
             </div>
           </div>
         </div>
