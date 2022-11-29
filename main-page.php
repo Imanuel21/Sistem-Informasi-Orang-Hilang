@@ -42,8 +42,14 @@ $result = $conn->query($sql1);
           <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           
           <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a>
-          <img src="img/notif.png" class="icon" alt="" />
-          <div class="icon user-profile"></div>
+          <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
+          
+          <div class="dropdown">
+          <button class="mainmenubtn"></button>
+            <div class="dropdown-child">
+                <a href="page-login.php">LOG OUT</a>
+            </div>
+          </div>
         </div>
       </div>
     </nav>

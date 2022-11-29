@@ -1,6 +1,46 @@
+.mainmenubtn {
+  /* background-color: skyblue;
+  color: white; */
+  border: none;
+  cursor: pointer;
+  /* padding:20px; */
+  margin-top: 20px;
+}
+.mainmenubtn:hover {
+  background-color: red;
+}
+.dropdown {
+  width: 23px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background-image: url(img/profile-pic.png);
+  background-size: cover;
+  position: absolute;
+  display: inline-block;
+}
+.dropdown-child {
+  display: none;
+  background-color: white;
+  min-width: 200px;
+}
+.dropdown-child a {
+  /* color: blue;
+  padding: 20px;
+  text-decoration: none;
+  display: block; */
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown:hover .dropdown-child {
+  display: block;
+}
 .link {
   padding-top: 10px;
 }
+
 .right-col {
   padding: 20px;
 }
