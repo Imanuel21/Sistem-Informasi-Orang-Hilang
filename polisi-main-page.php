@@ -57,7 +57,7 @@ $result = $conn->query($sql1);
 .icon-button__badge {
   position: absolute;
   top: -4px;
-  right: 50px;
+  right: 5px;
   width: 15px;
   height: 15px;
   background: red;
@@ -76,17 +76,29 @@ $result = $conn->query($sql1);
         <input type="text" class="search-box" placeholder="search" />
         <div class="nav-items">
         <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
-          <!-- <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a> -->
-
-          
-          <!-- <button type="button" class="icon-button"> -->
             <a href="polisi-page-notif.php"><img src="img/notif.png" class="icon" alt="" /></a>
-            <!-- <img src="img/notif.png" class="icon" alt="" /> -->
-          <!-- <span class="material-icons">notifications</span> -->
           <span class="icon-button__badge">1</span>
-          <!-- </button> -->
 
-          <div class="icon user-profile"></div>
+          <?php
+            $sql4 = "SELECT * FROM missing_person_unit WHERE username = '".$user."'";
+            $result4 = $conn->query($sql4);
+            if ($result4->num_rows > 0) {
+              // output data of each row
+              while($row4 = $result4->fetch_assoc()) {
+              
+          ?>
+
+          <div class="dropdown">
+            <?php echo '<img style="border-radius = 50%" src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
+          <button class="mainmenubtn"></button>
+            <div class="dropdown-child">
+                <a href="page-login.php">LOGOUT</a>
+            </div>
+          </div>
+          <?php
+          }
+        }
+          ?>
         </div>
       </div>
     </nav>
@@ -103,7 +115,28 @@ $result = $conn->query($sql1);
           <div class="post">
             <div class="info">
               <div class="user">
-                <div class="profile-pic"><img src="img/PForghilang.jpeg" alt="" /></div>
+
+                <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
+                $result2 = $conn->query($sql3);
+                if ($result2->num_rows > 0) {
+                  // output data of each row
+                  while($row2 = $result2->fetch_assoc()) {
+                    $pelapor=$row2['username'];
+                    // $fotoProfil = $row2['foto_profil'];
+                    
+                    ?>
+                    <div class="profile-pic"><?php
+                      echo '<img src= "data:image/png;base64,'.base64_encode($row2['foto_profil']).'"height = "400" width ="350"/> ';
+                      ?>           
+                      " alt="" /></div>
+                    <?php
+
+                  }
+                } else {
+                    echo "Hasil Pencarian Tidak Ada";
+                }
+                ?>
+
                 <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
                 $result2 = $conn->query($sql3);
                 if ($result2->num_rows > 0) {
@@ -129,40 +162,40 @@ $result = $conn->query($sql1);
                       echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';
                       ?>
                     </td>
-                    <td>Nama</td>
-                    <td>:</td>
-                    <td><?php echo $row["Nama"]; ?> </td>
+                    <td><b>Nama</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Nama"]; ?></b></td>
                     
                   </tr>
                   <tr>
-                    <td>TTL</td>
-                    <td>:</td>
-                    <td><?php echo $row["Tanggal_Lahir"]; ?> </td>
+                    <td><b>TTL</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Tanggal_Lahir"]; ?></b> </td>
                   </tr>
                   <tr >
-                    <td>Pekerjaan</td>
-                    <td>:</td>
-                    <td><?php echo $row["Pekerjaan"]; ?> </td>
+                    <td><b>Pekerjaan</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Pekerjaan"]; ?></b> </td>
                   </tr>
                   <tr >
-                    <td>Agama</td>
-                    <td>:</td>
-                    <td><?php echo $row["Agama"]; ?> </td>
+                    <td><b>Agama</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Agama"]; ?> </b></td>
                   </tr>
                   <tr >
-                    <td>Alamat</td>
-                    <td>:</td>
-                    <td><?php echo $row["Alamat"]; ?> </td>
+                    <td><b>Alamat</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Alamat"]; ?></b> </td>
                   </tr>
                   <tr >
-                    <td>Ciri-ciri</td>
-                    <td>:</td>
-                    <td><?php echo $row["Ciri_ciri"]; ?></td>
+                    <td><b>Ciri-ciri</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Ciri_ciri"]; ?></b></td>
                   </tr>
                   <tr >
-                    <td>Deskripsi</td>
-                    <td>:</td>
-                    <td><?php echo $row["Deskripsi"]; ?> </td>
+                    <td><b>Deskripsi</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Deskripsi"]; ?></b> </td>
                   </tr>
                   </table>
             </div>

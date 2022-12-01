@@ -8,7 +8,7 @@ $komen = "";
 $id_user = "";
 $pelapor = "";
 
-$sql0 = "SELECT Id_user FROM users WHERE username = '".$user."'";
+$sql0 = "SELECT * FROM users WHERE username = '".$user."'";
 $result0 = $conn->query($sql0);
 if ($result0->num_rows > 0) {
   // output data of each row
@@ -22,6 +22,7 @@ FROM orang_hilang e JOIN laporan d
 ON (e.No_Identitas = d.No_Identitas) WHERE e.Status = 'Menghilang'";
 
 $result = $conn->query($sql1);
+                
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +31,7 @@ $result = $conn->query($sql1);
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main-page.css">
+    <link rel="stylesheet" href="main-page.css" />
     <title>ORANG HILANG</title>
   </head>
   <body>
@@ -43,13 +44,26 @@ $result = $conn->query($sql1);
           
           <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a>
           <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
-          
+          <?php
+            $sql4 = "SELECT * FROM users WHERE username = '".$user."'";
+            $result4 = $conn->query($sql4);
+            if ($result4->num_rows > 0) {
+              // output data of each row
+              while($row4 = $result4->fetch_assoc()) {
+              
+          ?>
+
           <div class="dropdown">
+            <?php echo '<img src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
           <button class="mainmenubtn"></button>
             <div class="dropdown-child">
                 <a href="page-login.php">LOGOUT</a>
             </div>
           </div>
+          <?php
+          }
+        }
+          ?>
         </div>
       </div>
     </nav>
@@ -66,18 +80,28 @@ $result = $conn->query($sql1);
           <div class="post">
             <div class="info">
               <div class="user">
-                <div class="profile-pic"><img src="img/PForghilang.jpeg" alt="" /></div>
+                
                 <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
                 $result2 = $conn->query($sql3);
                 if ($result2->num_rows > 0) {
                   // output data of each row
                   while($row2 = $result2->fetch_assoc()) {
                     $pelapor=$row2['username'];
+                    // $fotoProfil = $row2['foto_profil'];
+                    
+                    ?>
+                    <div class="profile-pic"><?php
+                      echo '<img src= "data:image/png;base64,'.base64_encode($row2['foto_profil']).'"height = "400" width ="350"/> ';
+                      ?>           
+                      " alt="" /></div>
+                    <?php
+
                   }
                 } else {
                     echo "Hasil Pencarian Tidak Ada";
                 }
                 ?>
+                
                 <p class="username"><?php echo $pelapor ;?></p>
               </div>
                 <img src="img/option.PNG" class="options" alt="" />
@@ -125,7 +149,7 @@ $result = $conn->query($sql1);
                   <tr >
                     <td>Deskripsi</td>
                     <td>:</td>
-                    <td><?php echo $row["Deskripsi"]; ?> </td>
+                    <td valign="middle"><?php echo $row["Deskripsi"]; ?> </td>
                   </tr>
                   </table>
             </div>
