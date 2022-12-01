@@ -8,7 +8,7 @@ $komen = "";
 $id_user = "";
 $pelapor = "";
 
-$sql0 = "SELECT Id_user FROM users WHERE username = '".$user."'";
+$sql0 = "SELECT * FROM users WHERE username = '".$user."'";
 $result0 = $conn->query($sql0);
 if ($result0->num_rows > 0) {
   // output data of each row
@@ -20,6 +20,7 @@ $_SESSION["idUser"] = $id_user;
 $sql1 = "SELECT  *
 FROM orang_hilang e JOIN laporan d
 ON (e.No_Identitas = d.No_Identitas) WHERE e.No_Identitas = '".$_GET['id_hilang']."'";
+
 
 $result = $conn->query($sql1);
 
@@ -37,19 +38,32 @@ $result = $conn->query($sql1);
     <nav class="navbar">
       <div class="nav-wrapper">
         <img src="img/logo.PNG" class="brand-img" alt="" />
-        <input type="text" class="search-box" placeholder="search" />
+        <!-- <input type="text" class="search-box" placeholder="search" /> -->
         <div class="nav-items">
-          <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
+        <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           
-          <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a>
+          <a href="page-tambah-laporan.php?user=<?php echo $user; ?>"><img src="img/add.PNG"class="icon"/></a>
           <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
-          
+          <?php
+            $sql4 = "SELECT * FROM users WHERE username = '".$user."'";
+            $result4 = $conn->query($sql4);
+            if ($result4->num_rows > 0) {
+              // output data of each row
+              while($row4 = $result4->fetch_assoc()) {
+              
+          ?>
+
           <div class="dropdown">
+            <?php echo '<img src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
           <button class="mainmenubtn"></button>
             <div class="dropdown-child">
-                <a href="page-login.php">LOG OUT</a>
+                <a href="page-login.php">LOGOUT</a>
             </div>
           </div>
+          <?php
+          }
+        }
+          ?>
         </div>
       </div>
     </nav>
@@ -66,13 +80,21 @@ $result = $conn->query($sql1);
           <div class="post">
             <div class="info">
               <div class="user">
-                <div class="profile-pic"><img src="img/PForghilang.jpeg" alt="" /></div>
-                <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
+              <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
                 $result2 = $conn->query($sql3);
                 if ($result2->num_rows > 0) {
                   // output data of each row
                   while($row2 = $result2->fetch_assoc()) {
                     $pelapor=$row2['username'];
+                    // $fotoProfil = $row2['foto_profil'];
+                    
+                    ?>
+                    <div class="profile-pic"><?php
+                      echo '<img src= "data:image/png;base64,'.base64_encode($row2['foto_profil']).'"height = "400" width ="350"/> ';
+                      ?>           
+                      " alt="" /></div>
+                    <?php
+
                   }
                 } else {
                     echo "Hasil Pencarian Tidak Ada";
@@ -80,14 +102,11 @@ $result = $conn->query($sql1);
                 ?>
                 <p class="username"><?php echo $pelapor ;?></p>
               </div>
-                <img src="img/option.PNG" class="options" alt="" />
                 </div>
                 <div class="tabel-content">
-              <!-- <img src="img/cover 14.png" class="post-image" alt="" /> -->
               <table action="pencarian.php" method="POST" border="0" style="background-color: orange;">
                   <tr>
                     <td rowspan="7">
-                      <!-- <img src="image_view.php?id_gambar=<?php echo $row['No_Identitas']; ?>" width="400"> -->
                       <?php
                       echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';
                       ?>
@@ -130,12 +149,12 @@ $result = $conn->query($sql1);
                   </table>
             </div>
             <div class="post-content">
-              <div class="reaction-wrapper">
+              <!-- <div class="reaction-wrapper"> -->
                 
-                <img src="img/comment.PNG" class="icon" alt="" />
-                <img src="img/send.PNG" class="icon" alt="" />
-                <img src="img/save.PNG" class="save icon" alt="" />
-              </div>
+                <!-- <img src="img/comment.PNG" class="icon" alt="" /> -->
+                <!-- <img src="img/send.PNG" class="icon" alt="" /> -->
+                <!-- <img src="img/save.PNG" class="save icon" alt="" /> -->
+              <!-- </div> -->
               
               <?php
                 $no_laporan = $row["No_Laporan"];
@@ -153,7 +172,7 @@ $result = $conn->query($sql1);
                   }
                 }
               ?>
-              <p class="post-time">2 minutes ago</p>
+              <!-- <p class="post-time">2 minutes ago</p> -->
             </div>
             <div class="comment-wrapper">
               <img src="img/smile.PNG" class="icon" alt="" />

@@ -39,19 +39,79 @@ $result = $conn->query($sql1);
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main-page.css" />
+    <link rel="stylesheet" href="polisi-main-page.css" />
     <title>ORANG HILANG</title>
   </head>
+  <style>
+    .icon-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: #333333;
+  background: #dddddd;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+}
+
+.icon-button:hover {
+  cursor: pointer;
+}
+
+.icon-button:active {
+  background: #cccccc;
+}
+
+.icon-button__badge {
+  position: absolute;
+  top: -4px;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  background: red ;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.button{
+  color: red;
+}
+  </style>
   <body>
-    <nav class="navbar">
+  <nav class="navbar">
       <div class="nav-wrapper">
         <img src="img/logo.PNG" class="brand-img" alt="" />
-        <input type="text" class="search-box" placeholder="search" />
+        <!-- <input type="text" class="search-box" placeholder="search" /> -->
         <div class="nav-items">
         <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
-          <!-- <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a> -->
-          <img src="img/notif.png" class="icon" alt="" />
-          <div class="icon user-profile"></div>
+            <a href="polisi-page-notif.php"><img src="img/notif.png" class="icon" alt="" /></a>
+          <span class="icon-button__badge">1</span>
+
+          <?php
+            $sql4 = "SELECT * FROM missing_person_unit WHERE username = '".$user."'";
+            $result4 = $conn->query($sql4);
+            if ($result4->num_rows > 0) {
+              // output data of each row
+              while($row4 = $result4->fetch_assoc()) {
+              
+          ?>
+
+          <div class="dropdown">
+            <?php echo '<img style="border-radius = 50%" src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
+          <button class="mainmenubtn"></button>
+            <div class="dropdown-child">
+                <a href="page-login.php">LOGOUT</a>
+            </div>
+          </div>
+          <?php
+          }
+        }
+          ?>
         </div>
       </div>
     </nav>
@@ -75,7 +135,7 @@ $result = $conn->query($sql1);
                 </div> -->
                 <div class="tabel-content">
               <!-- <img src="img/cover 14.png" class="post-image" alt="" /> -->
-              <table action="pencarian.php" method="POST" border="0" style="background-color: orange;">
+              <table action="pencarian.php" method="POST" border="0" style="background-color: orange;" >
                   
               <tr>
                     <td rowspan="5">
@@ -120,7 +180,7 @@ $result = $conn->query($sql1);
                     <td><?php echo $row["Agama"]; ?> </td>
                   </tr>
                   <tr >
-                    <td rowspan="2"><?php echo $id_user  ;?></td>
+                    <td rowspan="2">NRP : <?php echo $id_user  ;?></td>
                     <td>Alamat</td>
                     <td>:</td>
                     <td><?php echo $row["Alamat"]; ?> </td>
@@ -131,7 +191,7 @@ $result = $conn->query($sql1);
                     <td><?php echo $row["Ciri_ciri"]; ?></td>
                   </tr>
                   <tr >
-                    <td><?php echo(date("Y-m-d",$t)); ?></td>
+                    <td>Tanggal Validasi : <?php echo(date("Y-m-d",$t)); ?></td>
                     <td>Deskripsi</td>
                     <td>:</td>
                     <td><?php echo $row["Deskripsi"]; ?> </td>
@@ -146,7 +206,7 @@ $result = $conn->query($sql1);
                       <input hidden type="text" name="id_laporan" class="comment-box" value="<?php echo $no_laporan;?>" />
                       <input type="submit" name="submit" value="POST" class="comment-btn" />
               </form> -->
-              <button>TOLAK</button>
+              <!-- <button>TOLAK</button> -->
               <a href="action-page-unggah.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><button>UNGGAH</button></a>
               
               <a href="polisi-page-detail-notif.php"><button>KEMBALI</button></a>

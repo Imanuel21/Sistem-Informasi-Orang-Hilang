@@ -4,10 +4,11 @@
 include("connection-database.php");
 session_start();
 $user = $_SESSION["user"];
-
+$komen = "";
 $id_user = "";
+$pelapor = "";
 
-$sql0 = "SELECT Id_user FROM users WHERE username = '".$user."'";
+$sql0 = "SELECT * FROM users WHERE username = '".$user."'";
 $result0 = $conn->query($sql0);
 if ($result0->num_rows > 0) {
   // output data of each row
@@ -16,7 +17,8 @@ if ($result0->num_rows > 0) {
   }
 }
 $_SESSION["idUser"] = $id_user;
-$sql1 = "SELECT  * FROM orang_hilang WHERE No_Identitas = '".$_GET["id_hilang"]."'";
+$sql1 = "SELECT  * FROM orang_hilang  WHERE No_Identitas = '".$_GET['id_hilang']."'";
+
 
 $result = $conn->query($sql1);
 
@@ -27,95 +29,21 @@ $result = $conn->query($sql1);
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="polisi-main-page.css" />
+    <link rel="stylesheet" href="main-page.css" />
     <title>ORANG HILANG</title>
   </head>
-  <style>
-    .icon-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  color: #333333;
-  background: #dddddd;
-  border: none;
-  outline: none;
-  border-radius: 50%;
-}
-
-.icon-button:hover {
-  cursor: pointer;
-}
-
-.icon-button:active {
-  background: #cccccc;
-}
-
-.icon-button__badge {
-  position: absolute;
-  top: -4px;
-  right: 5px;
-  width: 15px;
-  height: 15px;
-  background: red ;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-}
-.button-terima {
-  /* margin-top: 40px; */
-    width: 100px;
-    background-color: #4169E1;
-    color: white;
-    padding: 15px 0;
-    font-size: 15px;
-    font-weight: 60;
-    border: none;
-    cursor: pointer;
-    margin-left: 100px;
-}
-.button-tolak {
-  /* margin-top: 40px; */
-    width: 100px;
-    background-color: #4169E1;
-    color: white;
-    padding: 15px 0;
-    font-size: 15px;
-    font-weight: 60;
-    border: none;
-    cursor: pointer;
-    
-}
-.button-kembali {
-  /* margin-top: 40px; */
-    width: 100px;
-    background-color: #4169E1;
-    color: white;
-    padding: 15px 0;
-    font-size: 15px;
-    font-weight: 60;
-    border: none;
-    cursor: pointer;
-    margin-left: 107px;
-    
-}
-  </style>
   <body>
-  <nav class="navbar">
+    <nav class="navbar">
       <div class="nav-wrapper">
         <img src="img/logo.PNG" class="brand-img" alt="" />
         <!-- <input type="text" class="search-box" placeholder="search" /> -->
         <div class="nav-items">
-        <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
-            <a href="polisi-page-notif.php"><img src="img/notif.png" class="icon" alt="" /></a>
-          <span class="icon-button__badge">1</span>
-
+        <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
+          
+          <a href="page-tambah-laporan.php?user=<?php echo $user; ?>"><img src="img/add.PNG"class="icon"/></a>
+          <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
           <?php
-            $sql4 = "SELECT * FROM missing_person_unit WHERE username = '".$user."'";
+            $sql4 = "SELECT * FROM users WHERE username = '".$user."'";
             $result4 = $conn->query($sql4);
             if ($result4->num_rows > 0) {
               // output data of each row
@@ -124,7 +52,7 @@ $result = $conn->query($sql1);
           ?>
 
           <div class="dropdown">
-            <?php echo '<img style="border-radius = 50%" src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
+            <?php echo '<img src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
           <button class="mainmenubtn"></button>
             <div class="dropdown-child">
                 <a href="page-login.php">LOGOUT</a>
@@ -148,19 +76,35 @@ $result = $conn->query($sql1);
         <div class="left-col">
           <!-- status wrappers -->
           <div class="post">
-            <!-- <div class="info"> -->
-              <!-- <div class="user">
-                <div class="profile-pic"><img src="img/PForghilang.jpeg" alt="" /></div>
-                <p class="username">Web_OrangHilang</p>
+            <div class="info">
+              <div class="user">
+              <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
+                $result2 = $conn->query($sql3);
+                if ($result2->num_rows > 0) {
+                  // output data of each row
+                  while($row2 = $result2->fetch_assoc()) {
+                    $pelapor=$row2['username'];
+                    // $fotoProfil = $row2['foto_profil'];
+                    
+                    ?>
+                    <div class="profile-pic"><?php
+                      echo '<img src= "data:image/png;base64,'.base64_encode($row2['foto_profil']).'"height = "400" width ="350"/> ';
+                      ?>           
+                      " alt="" /></div>
+                    <?php
+
+                  }
+                } else {
+                    echo "Hasil Pencarian Tidak Ada";
+                }
+                ?>
+                <p class="username"><?php echo $pelapor ;?></p>
               </div>
-                <img src="img/option.PNG" class="options" alt="" />
-                </div> -->
+                </div>
                 <div class="tabel-content">
-              <!-- <img src="img/cover 14.png" class="post-image" alt="" /> -->
               <table action="pencarian.php" method="POST" border="0" style="background-color: orange;">
                   <tr>
                     <td rowspan="7">
-                      <!-- <img src="image_view.php?id_gambar=<?php echo $row['No_Identitas']; ?>" width="400"> -->
                       <?php
                       echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';
                       ?>
@@ -201,23 +145,8 @@ $result = $conn->query($sql1);
                     <td><?php echo $row["Deskripsi"]; ?> </td>
                   </tr>
                   </table>
-            <!-- </div> -->
-            
-            
-                
-                <!-- <form action="action-tambah-comment.php" method="GET">
-                      <input type="text" name="comment" class="comment-box" placeholder="Add a comment..." />
-                      <input hidden type="text" name="id_laporan" class="comment-box" value="<?php echo $no_laporan;?>" />
-                      <input type="submit" name="submit" value="POST" class="comment-btn" />
-              </form> -->
-              
-              <a href="action-tolak-laporan.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><button class="button-tolak">TOLAK</button></a>
-              <a href="polisi-page-unggah.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><button class="button-terima">TERIMA</button></a>
-              
-              <a href="polisi-page-notif.php"><button class="button-kembali">KEMBALI</button></a>
-              
-              
             </div>
+            
           </div>
           </div> 
       </div>

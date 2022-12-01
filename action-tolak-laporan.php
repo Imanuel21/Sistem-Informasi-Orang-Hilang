@@ -40,21 +40,21 @@ $conn->close();
 include("connection-database.php");
 
 // $sql2 = "INSERT INTO laporan (`No_Laporan`, `ID_User`, `No_Identitas`, `ID_Polisi`, `Tanggal_Validasi`) VALUES ('',".$pelapor."','".$No_Identitas."','".$id_Polisi."','".$dateHariini."')";
-$sql2 = "INSERT INTO laporan (`No_Laporan`, `ID_User`, `No_Identitas`, `ID_Polisi`, `Tanggal_Validasi`) VALUES ('','".$pelapor."','".$No_Identitas."','".$id_Polisi."','".$dateHariini."')";
+// $sql2 = "INSERT INTO laporan (`No_Laporan`, `ID_User`, `No_Identitas`, `ID_Polisi`, `Tanggal_Validasi`) VALUES ('','".$pelapor."','".$No_Identitas."','".$id_Polisi."','".$dateHariini."')";
 
 
-if ($conn->query($sql2) === TRUE) {
+// if ($conn->query($sql2) === TRUE) {
   //set visible jadi 1 supaya nanti yang 0 saja yang di tampilkan
-  $sql3 = "UPDATE `orang_hilang` SET `Visible` = '1' WHERE `orang_hilang`.`No_Identitas` = '".$No_Identitas."'";
+  $sql3 = "UPDATE `orang_hilang` SET `Visible` = '2' WHERE `orang_hilang`.`No_Identitas` = '".$No_Identitas."'";
   if ($conn->query($sql3)) {
-    echo '<script language="javascript">alert("LAPORAN BERHASIL DIUNGGAH");</script>';
+    echo '<script language="javascript">alert("LAPORAN BERHASIL DIVERIVIKASI");</script>';
     echo "<script>document.location = 'polisi-page-notif.php'</script>";
   }else {
     echo '<script language="javascript">alert("LAPORAN GAGAL DIUNGGAH");</script>';
     echo "<script>document.location = 'polisi-page-detail-notif.php'</script>";
   }
   
-} 
+// } 
 
 
 

@@ -17,12 +17,9 @@ if ($result0->num_rows > 0) {
 }
 // echo "id user :". $id_user;
 // $sql1 = "SELECT * FROM `orang_hilang` WHERE pelapor = '".$id_user."' AND 'Visible' = '1'";
-$sql1 = "SELECT * FROM `orang_hilang` WHERE orang_hilang.pelapor = '".$id_user."' AND Visible = '1';";
-
-
-$laporan= "";
-
+$sql1 = "SELECT * FROM `orang_hilang` WHERE orang_hilang.pelapor = '".$id_user."' AND Visible = '1' AND Status = 'Menghilang'";
 $result1 = $conn->query($sql1);
+$laporan= "";
 // if ($result1->num_rows > 0) {
 //   // output data of each row
 //   while($row1 = $result1->fetch_assoc()) {
@@ -51,17 +48,30 @@ $count = 1;
         <img src="img/logo.PNG" class="brand-img" alt="" />
         <input type="text" class="search-box" placeholder="search" />
         <div class="nav-items">
-          <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
+        <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           
-          <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a>
+          <a href="page-tambah-laporan.php?user=<?php echo $user; ?>"><img src="img/add.PNG"class="icon"/></a>
           <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
-          
+          <?php
+            $sql4 = "SELECT * FROM users WHERE username = '".$user."'";
+            $result4 = $conn->query($sql4);
+            if ($result4->num_rows > 0) {
+              // output data of each row
+              while($row4 = $result4->fetch_assoc()) {
+              
+          ?>
+
           <div class="dropdown">
+            <?php echo '<img src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
           <button class="mainmenubtn"></button>
             <div class="dropdown-child">
-                <a href="page-login.php">LOG OUT</a>
+                <a href="page-login.php">LOGOUT</a>
             </div>
           </div>
+          <?php
+          }
+        }
+          ?>
         </div>
       </div>
     </nav>
@@ -75,22 +85,58 @@ $count = 1;
                 <div class="tabel-content">
 
                 <?php
+                $sql2 = "SELECT * FROM `orang_hilang` WHERE orang_hilang.pelapor = '".$id_user."' AND Visible = '1' AND Status = 'Ditemukan'";
+                $result2 = $conn->query($sql2);
+                if ($result2->num_rows > 0) {
+                  // output data of each row
+                  while($row2 = $result2->fetch_assoc()) {
+                    $laporanDitemukan = $row2['Nama'];
+                  // $Image=$row['Foto'];
+                  // echo $row["pelapor"]." telah menambahkan laporan";
+                  ?>
+                  <div class="link">
+              <a style="color: black;" href="user-page-detail-notif.php?id_hilang=<?php echo $row2["No_Identitas"];  ?>"><?php echo $count.". laporan anda untuk ".$laporanDitemukan." sudah di temukan <br>"; $count++; ?></a>
+              </div>
+                  <?php
+                }
+                } else {
+                  // echo "Hasil Pencarian Tidak Ada";
+                }
                   if ($result1->num_rows > 0) {
                     // output data of each row
                     while($row1 = $result1->fetch_assoc()) {
                       $laporan = $row1['Nama'];
                     // $Image=$row['Foto'];
                     // echo $row["pelapor"]." telah menambahkan laporan";
-
+                    
                   ?>
                   <div class="link">
                   <a style="color: black;" href="user-page-detail-notif.php?id_hilang=<?php echo $row1["No_Identitas"];  ?>"><?php echo $count.". laporan anda untuk ".$laporan." sudah di unggah <br>"; $count++; ?></a>
                   </div>
             <?php
+                  
+                    
                   }
               } else {
                   echo "Hasil Pencarian Tidak Ada";
               }
+              $sql3 = "SELECT * FROM `orang_hilang` WHERE orang_hilang.pelapor = '".$id_user."' AND Visible = '2' ";
+                $result3 = $conn->query($sql3);
+                if ($result3->num_rows > 0) {
+                  // output data of each row
+                  while($row3 = $result3->fetch_assoc()) {
+                    $laporanDitolak = $row3['Nama'];
+                  // $Image=$row['Foto'];
+                  // echo $row["pelapor"]." telah menambahkan laporan";
+                  ?>
+                  <div class="link">
+              <a style="color: black;" href="user-page-detail-notif-tolak.php?id_hilang=<?php echo $row3["No_Identitas"];  ?>"><?php echo $count.". laporan anda untuk ".$laporanDitolak." ditolak <br>"; $count++; ?></a>
+              </div>
+                  <?php
+                }
+                } else {
+                  // echo "Hasil Pencarian Tidak Ada";
+                }
               ?>
               </div>
           </div>
