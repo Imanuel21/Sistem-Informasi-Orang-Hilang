@@ -55,11 +55,12 @@ body {
 }
 
 .wrapper .form-group .form-control {
+    width: 100%;
     background: inherit;
     border: none;
     border-radius: 0px;
     box-shadow: none;
-    color: #e9e9e9;
+    color: black;
 }
 
 .wrapper .form-group input::placeholder {
