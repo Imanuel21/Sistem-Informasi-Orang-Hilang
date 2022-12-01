@@ -139,11 +139,12 @@ body {
 }
 
 .wrapper .form-group .form-control {
-    background: inherit;
-    border: none;
-    border-radius: 0px;
-    box-shadow: none;
-    color: #404258;
+    width: 100%;
+    background: white;
+    /* border: none;
+    border-radius: 0px; */
+    /* box-shadow: none; */
+    /* color: #404258; */
 }
 
 .wrapper .form-group input::placeholder {
