@@ -38,7 +38,7 @@ $result = $conn->query($sql1);
     <nav class="navbar">
       <div class="nav-wrapper">
         <img src="img/logo.PNG" class="brand-img" alt="" />
-        <input type="text" class="search-box" placeholder="search" />
+        <!-- <input type="text" class="search-box" placeholder="search" /> -->
         <div class="nav-items">
           <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           
@@ -104,7 +104,7 @@ $result = $conn->query($sql1);
                 
                 <p class="username"><?php echo $pelapor ;?></p>
               </div>
-                <img src="img/option.PNG" class="options" alt="" />
+                <!-- <img src="img/option.PNG" class="options" alt="" /> -->
                 </div>
                 <div class="tabel-content">
               <!-- <img src="img/cover 14.png" class="post-image" alt="" /> -->
@@ -154,12 +154,12 @@ $result = $conn->query($sql1);
                   </table>
             </div>
             <div class="post-content">
-              <div class="reaction-wrapper">
+              <!-- <div class="reaction-wrapper">
                 
-                <img src="img/comment.PNG" class="icon" alt="" />
-                <img src="img/send.PNG" class="icon" alt="" />
-                <img src="img/save.PNG" class="save icon" alt="" />
-              </div>
+                 <img src="img/comment.PNG" class="icon" alt="" /> -->
+                <!-- <img src="img/send.PNG" class="icon" alt="" /> -->
+                <!-- <img src="img/save.PNG" class="save icon" alt="" /> -->
+              <!-- </div> -->
               
               <?php
                 $no_laporan = $row["No_Laporan"];
@@ -177,7 +177,7 @@ $result = $conn->query($sql1);
                   }
                 }
               ?>
-              <p class="post-time">2 minutes ago</p>
+              <!-- <p class="post-time">2 minutes ago</p> -->
             </div>
             <div class="comment-wrapper">
               <img src="img/smile.PNG" class="icon" alt="" />
