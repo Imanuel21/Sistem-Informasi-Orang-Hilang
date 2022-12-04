@@ -60,7 +60,7 @@ $result = $conn->query($sql1);
             <h3>Edit Laporan</h3>
             <br></br>
             <div class="form-group d-flex align-items-center">
-                <input autocomplete="off" type="text" class="form-control" title="No_Identitas" name="No_Identitas" value="<?php echo $row['No_Identitas'];?>">
+                <input autocomplete="off" readonly type="text" class="form-control" title="No_Identitas" name="No_Identitas" value="<?php echo $row['No_Identitas'];?>">
             </div>
             <div class="form-group d-flex align-items-center">
                 <input autocomplete="off" type="text" class="form-control" title="Nama" name="Nama" value="<?php echo $row['Nama'];?>">
