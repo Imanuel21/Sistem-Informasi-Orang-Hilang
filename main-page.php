@@ -1,7 +1,5 @@
 <?php
-
-//koen sudah, sekarang lanjut sisi polisi atau kalau mau bagian pemberitahuan
-include("connection-database.php");
+include("Model/connection-database.php");
 session_start();
 $user = $_SESSION["user"];
 $komen = "";
@@ -22,7 +20,6 @@ FROM orang_hilang e JOIN laporan d
 ON (e.No_Identitas = d.No_Identitas) WHERE e.Status = 'Menghilang'";
 
 $result = $conn->query($sql1);
-                
 
 ?>
 <!DOCTYPE html>
@@ -38,11 +35,9 @@ $result = $conn->query($sql1);
     <nav class="navbar">
       <div class="nav-wrapper">
         <img src="img/logo.PNG" class="brand-img" alt="" />
-        <!-- <input type="text" class="search-box" placeholder="search" /> -->
         <div class="nav-items">
           <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
-          
-          <a href="page-tambah-laporan.php"><img src="img/add.PNG"class="icon"/></a>
+          <a href="page-tambah-laporan.php?user=<?php echo $user; ?>"><img src="img/add.PNG"class="icon"/></a>
           <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
           <?php
             $sql4 = "SELECT * FROM users WHERE username = '".$user."'";
@@ -52,7 +47,6 @@ $result = $conn->query($sql1);
               while($row4 = $result4->fetch_assoc()) {
               
           ?>
-
           <div class="dropdown">
             <?php echo '<img src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
           <button class="mainmenubtn"></button>
@@ -67,100 +61,78 @@ $result = $conn->query($sql1);
         </div>
       </div>
     </nav>
-              <?php
-              if ($result->num_rows > 0) {
-                  // output data of each row
-                  while($row = $result->fetch_assoc()) {
-                    $Image=$row['Foto'];
-                  ?> 
-                  <section class="main">
+    <?php
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        $Image=$row['Foto'];
+    ?> 
+    <section class="main">
       <div class="wrapper">
         <div class="left-col">
-          <!-- status wrappers -->
           <div class="post">
             <div class="info">
               <div class="user">
-                
                 <?php $sql3 = "SELECT * FROM  users  WHERE Id_user = '".$row['pelapor']."' "; 
                 $result2 = $conn->query($sql3);
                 if ($result2->num_rows > 0) {
                   // output data of each row
                   while($row2 = $result2->fetch_assoc()) {
                     $pelapor=$row2['username'];
-                    // $fotoProfil = $row2['foto_profil'];
-                    
-                    ?>
-                    <div class="profile-pic"><?php
-                      echo '<img src= "data:image/png;base64,'.base64_encode($row2['foto_profil']).'"height = "400" width ="350"/> ';
-                      ?>           
-                      " alt="" /></div>
-                    <?php
-
-                  }
-                } else {
-                    echo "Hasil Pencarian Tidak Ada";
-                }
                 ?>
-                
+                  <div class="profile-pic"><?php echo '<img src= "data:image/png;base64,'.base64_encode($row2['foto_profil']).'"height = "400" width ="350"/> ';?></div>
+                  <?php
+                  }
+                  } else {
+                    echo "Hasil Pencarian Tidak Ada";
+                  }
+                  ?>
                 <p class="username"><?php echo $pelapor ;?></p>
               </div>
-                <!-- <img src="img/option.PNG" class="options" alt="" /> -->
-                </div>
-                <div class="tabel-content">
-              <!-- <img src="img/cover 14.png" class="post-image" alt="" /> -->
+            </div>
+              <div class="tabel-content">
               <table action="pencarian.php" method="POST" border="0" style="background-color: orange;">
                   <tr>
                     <td rowspan="7">
-                      <!-- <img src="image_view.php?id_gambar=<?php echo $row['No_Identitas']; ?>" width="400"> -->
-                      <?php
-                      echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';
-                      ?>
+                      <?php echo '<img src= "data:image/png;base64,'.base64_encode($row['Foto']).'"height = "400" width ="350"/> ';?>
                     </td>
-                    <td>Nama</td>
-                    <td>:</td>
-                    <td><?php echo $row["Nama"]; ?> </td>
-                    
+                    <td><b>Nama</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Nama"]; ?></b></td>
                   </tr>
                   <tr>
-                    <td>TTL</td>
-                    <td>:</td>
-                    <td><?php echo $row["Tanggal_Lahir"]; ?> </td>
+                    <td><b>TTL</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Tanggal_Lahir"]; ?></b> </td>
                   </tr>
                   <tr >
-                    <td>Pekerjaan</td>
-                    <td>:</td>
-                    <td><?php echo $row["Pekerjaan"]; ?> </td>
+                    <td><b>Pekerjaan</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Pekerjaan"]; ?></b> </td>
                   </tr>
                   <tr >
-                    <td>Agama</td>
-                    <td>:</td>
-                    <td><?php echo $row["Agama"]; ?> </td>
+                    <td><b>Agama</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Agama"]; ?> </b></td>
                   </tr>
                   <tr >
-                    <td>Alamat</td>
-                    <td>:</td>
-                    <td><?php echo $row["Alamat"]; ?> </td>
+                    <td><b>Alamat</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Alamat"]; ?></b> </td>
                   </tr>
                   <tr >
-                    <td>Ciri-ciri</td>
-                    <td>:</td>
-                    <td><?php echo $row["Ciri_ciri"]; ?></td>
+                    <td><b>Ciri-ciri</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Ciri_ciri"]; ?></b></td>
                   </tr>
                   <tr >
-                    <td>Deskripsi</td>
-                    <td>:</td>
-                    <td valign="middle"><?php echo $row["Deskripsi"]; ?> </td>
+                    <td><b>Deskripsi</b></td>
+                    <td><b>:</b></td>
+                    <td><b><?php echo $row["Deskripsi"]; ?></b> </td>
                   </tr>
                   </table>
-            </div>
-            <div class="post-content">
-              <!-- <div class="reaction-wrapper">
-                
-                 <img src="img/comment.PNG" class="icon" alt="" /> -->
-                <!-- <img src="img/send.PNG" class="icon" alt="" /> -->
-                <!-- <img src="img/save.PNG" class="save icon" alt="" /> -->
-              <!-- </div> -->
-              
+              </div>
+              <div class="post-content">
               <?php
                 $no_laporan = $row["No_Laporan"];
                 $sql2 = "SELECT * FROM laporan 
@@ -172,33 +144,30 @@ $result = $conn->query($sql1);
                   // output data of each row
                   while($row2 = $result2->fetch_assoc()) {
               ?>
-                  <p class="description"><span><?php echo $row2["username"]; ?></span> <?php echo $row2["Informasi"]; ?></p>
+              <p class="description"><span><?php echo $row2["username"]; ?></span> <?php echo $row2["Informasi"]; ?></p>
               <?php
                   }
                 }
               ?>
-              <!-- <p class="post-time">2 minutes ago</p> -->
-            </div>
-            <div class="comment-wrapper">
+              </div>
+              <div class="comment-wrapper">
               <img src="img/smile.PNG" class="icon" alt="" />
-                
-                <form action="action-tambah-comment.php" method="GET">
-                      <input type="text" name="comment" class="comment-box" placeholder="Add a comment..." />
-                      <input hidden type="text" name="id_laporan" class="comment-box" value="<?php echo $no_laporan;?>" />
-                      <input type="submit" name="submit" value="POST" class="comment-btn" />
+              <form action="action-tambah-comment.php" method="GET">
+                <input type="text" name="comment" class="comment-box" placeholder="Add a comment..." />
+                <input hidden type="text" name="id_laporan" class="comment-box" value="<?php echo $no_laporan;?>" />
+                <input type="submit" name="submit" value="POST" class="comment-btn" />
               </form>
-              
-            </div>
+              </div>
           </div>
-          </div> 
+        </div> 
       </div>
     </section>
-              <?php
-                  }
-              } else {
-                  echo "Hasil Pencarian Tidak Ada";
-              }
-              ?>
+    <?php
+      }
+    } else {
+        echo "Hasil Pencarian Tidak Ada";
+    }
+    ?>
     
   </body>
 </html>

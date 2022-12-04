@@ -1,7 +1,5 @@
 <?php
-
-//koen sudah, sekarang lanjut sisi polisi atau kalau mau bagian pemberitahuan
-include("connection-database.php");
+include("Model/connection-database.php");
 session_start();
 $user = $_SESSION["idUser"];
 
@@ -19,9 +17,6 @@ if ($result0->num_rows > 0) {
     $id_Polisi = $row0['ID_Polisi'];
   }
 }
-// $_SESSION["idUser"] = $id_user;
-// $polisi = $id_user;
-
 // untuk dapatkan yang lapor
 $No_Identitas = $_GET["id_hilang"];
 $sql1 = "SELECT  * FROM orang_hilang WHERE No_Identitas = '".$No_Identitas."'";
@@ -32,30 +27,18 @@ if ($result2->num_rows > 0) {
     $pelapor = $row2['pelapor'];
   }
 }
-// echo "pelapor : ".$pelapor ."<br>";
-// echo "yang hilang : ".$No_Identitas ."<br>";
-// echo "polisi : ".$id_Polisi ."<br>";
-// echo "tanggal : ".$dateHariini ."<br>";
+
 $conn->close();
-include("connection-database.php");
+include("Model/connection-database.php");
 
-// $sql2 = "INSERT INTO laporan (`No_Laporan`, `ID_User`, `No_Identitas`, `ID_Polisi`, `Tanggal_Validasi`) VALUES ('',".$pelapor."','".$No_Identitas."','".$id_Polisi."','".$dateHariini."')";
-// $sql2 = "INSERT INTO laporan (`No_Laporan`, `ID_User`, `No_Identitas`, `ID_Polisi`, `Tanggal_Validasi`) VALUES ('','".$pelapor."','".$No_Identitas."','".$id_Polisi."','".$dateHariini."')";
-
-
-// if ($conn->query($sql2) === TRUE) {
   //set visible jadi 1 supaya nanti yang 0 saja yang di tampilkan
   $sql3 = "UPDATE `orang_hilang` SET `Visible` = '2' WHERE `orang_hilang`.`No_Identitas` = '".$No_Identitas."'";
   if ($conn->query($sql3)) {
-    echo '<script language="javascript">alert("LAPORAN BERHASIL DIVERIVIKASI");</script>';
+    echo '<script language="javascript">alert("LAPORAN BERHASIL DITOLAK");</script>';
     echo "<script>document.location = 'polisi-page-notif.php'</script>";
   }else {
-    echo '<script language="javascript">alert("LAPORAN GAGAL DIUNGGAH");</script>';
+    echo '<script language="javascript">alert("LAPORAN GAGAL DITOLAK");</script>';
     echo "<script>document.location = 'polisi-page-detail-notif.php'</script>";
   }
   
-// } 
-
-
-
 ?>

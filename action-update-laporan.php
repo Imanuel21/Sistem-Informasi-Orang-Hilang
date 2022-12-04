@@ -1,5 +1,5 @@
 <?php
-include("connection-database.php");
+include("Model/connection-database.php");
 $No_Identitas = $_POST['No_Identitas'];
 $Nama  = $_POST['Nama'];
 $Alamat = $_POST['Alamat'];
@@ -12,7 +12,7 @@ $Deskripsi = $_POST['Deskripsi'];
 $sql = "UPDATE `orang_hilang` SET `Nama`='".$Nama."',`Alamat`='".$Alamat."',
                 `Tanggal_Lahir`='".$Tanggal_Lahir."',`Ciri_ciri`='".$Ciri_ciri."',
                 `Pekerjaan`='".$Pekerjaan."',`Agama`='".$Agama."',
-                `Status`='".$Status."',`Deskripsi`='".$Deskripsi."',`Foto`='".$Foto."' WHERE No_Identitas = '".$No_Identitas."'";
+                `Status`='".$Status."',`Deskripsi`='".$Deskripsi."' WHERE No_Identitas = '".$No_Identitas."'";
 
     if ($conn->query($sql) === TRUE) {
         echo '<script language="javascript">alert("Laporan berhasil diedit");</script>';

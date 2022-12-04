@@ -1,11 +1,8 @@
 <?php
-
-include("connection-database.php");
+include("Model/connection-database.php");
 session_start();
 $user = $_GET["user"];
-
 $id_user = "";
-
 echo "user : ".$user."<br>" ;
 $sql0 = "SELECT Id_user FROM users WHERE username = '".$user."'";
 $result0 = $conn->query($sql0);
@@ -15,24 +12,11 @@ if ($result0->num_rows > 0) {
     $id_user = $row0['Id_user'];
   }
 }
-// echo "id user :". $id_user;
-// $sql1 = "SELECT * FROM `orang_hilang` WHERE pelapor = '".$id_user."' AND 'Visible' = '1'";
 $sql1 = "SELECT * FROM `orang_hilang` WHERE orang_hilang.pelapor = '".$id_user."' AND Visible = '1' AND Status = 'Menghilang'";
 $result1 = $conn->query($sql1);
 $laporan= "";
-// if ($result1->num_rows > 0) {
-//   // output data of each row
-//   while($row1 = $result1->fetch_assoc()) {
-//     $laporan = $row1['Nama'];
-//     echo "laporan anda untuk ".$laporan." sudah di unggah <br>";
-//   }
-// }else{
-//   echo "belum ada notifikasi";
-// }
 $count = 1;
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,10 +30,8 @@ $count = 1;
 <nav class="navbar">
       <div class="nav-wrapper">
         <img src="img/logo.PNG" class="brand-img" alt="" />
-        <input type="text" class="search-box" placeholder="search" />
         <div class="nav-items">
         <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
-          
           <a href="page-tambah-laporan.php?user=<?php echo $user; ?>"><img src="img/add.PNG"class="icon"/></a>
           <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
           <?php
@@ -58,9 +40,7 @@ $count = 1;
             if ($result4->num_rows > 0) {
               // output data of each row
               while($row4 = $result4->fetch_assoc()) {
-              
           ?>
-
           <div class="dropdown">
             <?php echo '<img src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
           <button class="mainmenubtn"></button>
@@ -78,12 +58,8 @@ $count = 1;
     <section class="main">
       <div class="wrapper">
         <div class="left-col">
-          <!-- status wrappers -->
-          
           <div class="post">
-          
                 <div class="tabel-content">
-
                 <?php
                 $sql2 = "SELECT * FROM `orang_hilang` WHERE orang_hilang.pelapor = '".$id_user."' AND Visible = '1' AND Status = 'Ditemukan'";
                 $result2 = $conn->query($sql2);
@@ -91,31 +67,25 @@ $count = 1;
                   // output data of each row
                   while($row2 = $result2->fetch_assoc()) {
                     $laporanDitemukan = $row2['Nama'];
-                  // $Image=$row['Foto'];
-                  // echo $row["pelapor"]." telah menambahkan laporan";
                   ?>
                   <div class="link">
-              <a style="color: black;" href="user-page-detail-notif.php?id_hilang=<?php echo $row2["No_Identitas"];  ?>"><?php echo $count.". laporan anda untuk ".$laporanDitemukan." sudah di temukan <br>"; $count++; ?></a>
+              <a style="color: black;" href="user-page-detail-notif-diterima.php?id_hilang=<?php echo $row2["No_Identitas"];  ?>"><?php echo $count.". laporan anda untuk ".$laporanDitemukan." sudah di temukan <br>"; $count++; ?></a>
               </div>
                   <?php
                 }
                 } else {
-                  // echo "Hasil Pencarian Tidak Ada";
+                  
                 }
                   if ($result1->num_rows > 0) {
                     // output data of each row
                     while($row1 = $result1->fetch_assoc()) {
                       $laporan = $row1['Nama'];
-                    // $Image=$row['Foto'];
-                    // echo $row["pelapor"]." telah menambahkan laporan";
                     
                   ?>
                   <div class="link">
                   <a style="color: black;" href="user-page-detail-notif.php?id_hilang=<?php echo $row1["No_Identitas"];  ?>"><?php echo $count.". laporan anda untuk ".$laporan." sudah di unggah <br>"; $count++; ?></a>
                   </div>
             <?php
-                  
-                    
                   }
               } else {
                   echo "Hasil Pencarian Tidak Ada";
@@ -126,8 +96,6 @@ $count = 1;
                   // output data of each row
                   while($row3 = $result3->fetch_assoc()) {
                     $laporanDitolak = $row3['Nama'];
-                  // $Image=$row['Foto'];
-                  // echo $row["pelapor"]." telah menambahkan laporan";
                   ?>
                   <div class="link">
               <a style="color: black;" href="user-page-detail-notif-tolak.php?id_hilang=<?php echo $row3["No_Identitas"];  ?>"><?php echo $count.". laporan anda untuk ".$laporanDitolak." ditolak <br>"; $count++; ?></a>
@@ -135,7 +103,7 @@ $count = 1;
                   <?php
                 }
                 } else {
-                  // echo "Hasil Pencarian Tidak Ada";
+                  
                 }
               ?>
               </div>

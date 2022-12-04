@@ -1,7 +1,5 @@
 <?php
-
-//koen sudah, sekarang lanjut sisi polisi atau kalau mau bagian pemberitahuan
-include("connection-database.php");
+include("Model/connection-database.php");
 session_start();
 $user = $_SESSION["user"];
 $komen = "";
@@ -38,7 +36,6 @@ $result = $conn->query($sql1);
     <nav class="navbar">
       <div class="nav-wrapper">
         <img src="img/logo.PNG" class="brand-img" alt="" />
-        <!-- <input type="text" class="search-box" placeholder="search" /> -->
         <div class="nav-items">
         <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           
@@ -50,9 +47,7 @@ $result = $conn->query($sql1);
             if ($result4->num_rows > 0) {
               // output data of each row
               while($row4 = $result4->fetch_assoc()) {
-              
           ?>
-
           <div class="dropdown">
             <?php echo '<img src= "data:image/png;base64,'.base64_encode($row4['foto_profil']).'"/> ';  ?>
           <button class="mainmenubtn"></button>
@@ -76,7 +71,6 @@ $result = $conn->query($sql1);
                   <section class="main">
       <div class="wrapper">
         <div class="left-col">
-          <!-- status wrappers -->
           <div class="post">
             <div class="info">
               <div class="user">
@@ -86,7 +80,6 @@ $result = $conn->query($sql1);
                   // output data of each row
                   while($row2 = $result2->fetch_assoc()) {
                     $pelapor=$row2['username'];
-                    // $fotoProfil = $row2['foto_profil'];
                     
                     ?>
                     <div class="profile-pic"><?php
@@ -94,7 +87,6 @@ $result = $conn->query($sql1);
                       ?>           
                       " alt="" /></div>
                     <?php
-
                   }
                 } else {
                     echo "Hasil Pencarian Tidak Ada";
@@ -114,7 +106,6 @@ $result = $conn->query($sql1);
                     <td>Nama</td>
                     <td>:</td>
                     <td><?php echo $row["Nama"]; ?> </td>
-                    
                   </tr>
                   <tr>
                     <td>TTL</td>
@@ -149,13 +140,6 @@ $result = $conn->query($sql1);
                   </table>
             </div>
             <div class="post-content">
-              <!-- <div class="reaction-wrapper"> -->
-                
-                <!-- <img src="img/comment.PNG" class="icon" alt="" /> -->
-                <!-- <img src="img/send.PNG" class="icon" alt="" /> -->
-                <!-- <img src="img/save.PNG" class="save icon" alt="" /> -->
-              <!-- </div> -->
-              
               <?php
                 $no_laporan = $row["No_Laporan"];
                 $sql2 = "SELECT * FROM laporan 
@@ -172,17 +156,14 @@ $result = $conn->query($sql1);
                   }
                 }
               ?>
-              <!-- <p class="post-time">2 minutes ago</p> -->
             </div>
             <div class="comment-wrapper">
               <img src="img/smile.PNG" class="icon" alt="" />
-                
                 <form action="action-tambah-comment.php" method="GET">
                       <input type="text" name="comment" class="comment-box" placeholder="Add a comment..." />
                       <input hidden type="text" name="id_laporan" class="comment-box" value="<?php echo $no_laporan;?>" />
                       <input type="submit" name="submit" value="POST" class="comment-btn" />
-              </form>
-              
+                </form>
             </div>
           </div>
           </div> 
@@ -194,6 +175,5 @@ $result = $conn->query($sql1);
                   echo "Hasil Pencarian Tidak Ada";
               }
               ?>
-    
   </body>
 </html>
