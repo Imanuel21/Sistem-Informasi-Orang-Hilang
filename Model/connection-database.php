@@ -1,3 +1,5 @@
+//jika anda menggunakan port 330h maka $port pada file ini dapat anda hapus
+
 <?php
 $servername = "localhost";
 $username = "root";
