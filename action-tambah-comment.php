@@ -30,6 +30,4 @@ if ($conn->query($sql1) === TRUE) {
     echo '<script language="javascript">alert("Informasi gagal ditambahkan");</script>';
     echo "<script>document.location = 'main-page-login.php'</script>";
 }
-
-
 ?>

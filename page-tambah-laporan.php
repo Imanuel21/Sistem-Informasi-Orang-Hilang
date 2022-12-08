@@ -22,7 +22,15 @@ ON (e.No_Identitas = d.No_Identitas) WHERE e.Status = 'Menghilang'";
 
 $result = $conn->query($sql1);
 
-
+$sql5 = "SELECT  * FROM orang_hilang WHERE pelapor = '".$id_user."' AND NOT Visible = '0'";
+$result5 = $conn->query($sql5);
+$countNotif = 0;
+if ($result5->num_rows > 0) {
+  // output data of each row
+  while ($row5 = $result5->fetch_assoc()) {
+    $countNotif++;
+  }
+}
 
 ?>
 
@@ -43,6 +51,7 @@ $result = $conn->query($sql1);
         <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
         <a href="page-tambah-laporan.php?user=<?php echo $user; ?>"><img src="img/add.PNG"class="icon"/></a>
         <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
+        <span class="icon-button__badge"><?php echo $countNotif;?></span>
             <?php
             $sql4 = "SELECT * FROM users WHERE username = '".$user."'";
             $result4 = $conn->query($sql4);

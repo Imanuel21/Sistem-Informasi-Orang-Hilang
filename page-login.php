@@ -16,7 +16,7 @@ session_start();
       <div class="shape"></div>
       <div class="shape"></div>
     </div>
-    <form action="action-page-login.php" method="POST">
+    <form action="Control\action-page-login.php" method="POST">
       <h3>Login</h3>
       <input type="text" placeholder="Username" name="username"/>
       <input type="password" placeholder="Kata Sandi"  name="password" />

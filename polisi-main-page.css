@@ -136,6 +136,7 @@
   display: grid;
   grid-template-columns: 60% 40%;
   grid-gap: 30px;
+  padding-top: 25px;
 }
 
 .left-col {

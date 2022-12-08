@@ -14,16 +14,16 @@
         <h3>Registrasi</h3>
         <br></br>
             <div class="form-group d-flex align-items-center">
-                <input autocomplete="off" type="text" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan (NIK)">
+                <input autocomplete="on" type="text" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan (NIK)">
             </div>
             <div class="form-group d-flex align-items-center">
-                <input autocomplete="off" type="text" class="form-control" name="nama" placeholder="Nama">
+                <input autocomplete="on" type="text" class="form-control" name="nama" placeholder="Nama">
             </div>
             <div class="form-group d-flex align-items-center">
-                <input autocomplete="off" type="text" class="form-control" name="alamat" placeholder="Alamat">
+                <input autocomplete="on" type="text" class="form-control" name="alamat" placeholder="Alamat">
             </div>
             <div class="form-group d-flex align-items-center">
-                <input autocomplete="off" type="text" class="form-control" name="hp" placeholder="No.HP">
+                <input autocomplete="on" type="text" class="form-control" name="hp" placeholder="No.HP">
             </div>
             <div class="form-group d-flex align-items-center">
                 <input autocomplete="off" type="text" class="form-control" name="username" placeholder="Username">
@@ -36,7 +36,9 @@
             </div>
             <button  name="btn" >Daftar</button>
             <br></br>
-            <center><p>Pastikan anda menginput data dengan benar!</p></center>
+            <!-- <center><p>Pastikan anda menginput data dengan benar!</p></center> -->
+            <center><p>Jika sudah mempunyai akun silahkan login di bawah ini</p></center>
+            <center><a href="page-login.php">Login</a></center>
         </form>
     </div>
   </body>

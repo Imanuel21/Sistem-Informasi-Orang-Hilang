@@ -16,6 +16,17 @@ $sql1 = "SELECT * FROM `orang_hilang` WHERE orang_hilang.pelapor = '".$id_user."
 $result1 = $conn->query($sql1);
 $laporan= "";
 $count = 1;
+
+$sql5 = "SELECT  * FROM orang_hilang WHERE pelapor = '".$id_user."' AND NOT Visible = '0'";
+$result5 = $conn->query($sql5);
+$countNotif = 0;
+if ($result5->num_rows > 0) {
+  // output data of each row
+  while ($row5 = $result5->fetch_assoc()) {
+    $countNotif++;
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +45,7 @@ $count = 1;
         <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           <a href="page-tambah-laporan.php?user=<?php echo $user; ?>"><img src="img/add.PNG"class="icon"/></a>
           <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
+          <span class="icon-button__badge"><?php echo $countNotif;?></span>
           <?php
             $sql4 = "SELECT * FROM users WHERE username = '".$user."'";
             $result4 = $conn->query($sql4);

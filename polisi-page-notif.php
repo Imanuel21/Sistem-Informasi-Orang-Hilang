@@ -13,11 +13,21 @@ if ($result0->num_rows > 0) {
     $id_user = $row0['Id_user'];
   }
 }
+$count = 1;
 $_SESSION["idUser"] = $id_user;
 $sql1 = "SELECT  * FROM orang_hilang WHERE Visible = '0'";
-
 $result = $conn->query($sql1);
-$count = 1;
+
+
+$sql5 = "SELECT  * FROM orang_hilang WHERE Visible = '0'";
+$result5 = $conn->query($sql5);
+$countNotif = 0;
+if ($result5->num_rows > 0) {
+  // output data of each row
+  while ($row5 = $result5->fetch_assoc()) {
+    $countNotif++;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +83,7 @@ $count = 1;
         <div class="nav-items">
         <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
             <a href="polisi-page-notif.php"><img src="img/notif.png" class="icon" alt="" /></a>
-          <span class="icon-button__badge">1</span>
+          <span class="icon-button__badge"><?php echo $countNotif;?></span>
           <?php
             $sql4 = "SELECT * FROM missing_person_unit WHERE username = '".$user."'";
             $result4 = $conn->query($sql4);
@@ -104,6 +114,7 @@ $count = 1;
                   if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
+
                   ?>
                   <div class="link">
                   <a style="color: black;" href="polisi-page-detail-notif.php?id_hilang=<?php echo $row["No_Identitas"];  ?>&user=<?php echo $user;?>"><?php echo $count.". ".$row["pelapor"]." telah menambahkan laporan <br>"; $count++; ?></a>

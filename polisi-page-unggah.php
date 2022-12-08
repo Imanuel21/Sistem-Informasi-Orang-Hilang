@@ -16,6 +16,15 @@ if ($result0->num_rows > 0) {
 $_SESSION["idUser"] = $user;
 $sql1 = "SELECT  * FROM orang_hilang WHERE No_Identitas = '".$_GET["id_hilang"]."'";
 $result = $conn->query($sql1);
+$sql5 = "SELECT  * FROM orang_hilang WHERE Visible = '0'";
+$result5 = $conn->query($sql5);
+$countNotif = 0;
+if ($result5->num_rows > 0) {
+  // output data of each row
+  while ($row5 = $result5->fetch_assoc()) {
+    $countNotif++;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +36,29 @@ $result = $conn->query($sql1);
     <title>UNGGAH LAPORAN</title>
   </head>
   <style>
+    .unggah {
+      width: 80px;
+      background-color: #4169E1;
+      color: white;
+      padding: 4px 0;
+      font-size: 15px;
+      font-weight: 60;
+      border: none;
+      cursor: pointer;
+      margin-left: 3px;
+    }
+    .kembali {
+      width: 80px;
+      background-color: #4169E1;
+      color: white;
+      padding: 4px 0;
+      font-size: 15px;
+      font-weight: 60;
+      border: none;
+      cursor: pointer;
+      margin-left: 3px;
+
+    }
     .icon-button {
       position: relative;
       display: flex;
@@ -73,7 +105,7 @@ $result = $conn->query($sql1);
         <div class="nav-items">
         <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
             <a href="polisi-page-notif.php"><img src="img/notif.png" class="icon" alt="" /></a>
-          <span class="icon-button__badge">1</span>
+            <span class="icon-button__badge"><?php echo $countNotif;?></span>
           <?php
             $sql4 = "SELECT * FROM missing_person_unit WHERE username = '".$user."'";
             $result4 = $conn->query($sql4);
@@ -164,8 +196,8 @@ $result = $conn->query($sql1);
                     <td><?php echo $row["Deskripsi"]; ?> </td>
                   </tr>
                   </table>
-              <a href="action-page-unggah.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><button>UNGGAH</button></a>
-              <a href="polisi-page-detail-notif.php"><button>KEMBALI</button></a>
+              <a href="action-page-unggah.php?id_hilang=<?php echo $row["No_Identitas"];  ?>"><button class="unggah">UNGGAH</button></a>
+              <a href="polisi-page-detail-notif.php?id_hilang=<?php echo $row["No_Identitas"];  ?>&user=<?php echo $user;?>"><button class="kembali">KEMBALI</button></a>
             </div>
           </div>
           </div> 

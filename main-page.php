@@ -21,6 +21,16 @@ ON (e.No_Identitas = d.No_Identitas) WHERE e.Status = 'Menghilang'";
 
 $result = $conn->query($sql1);
 
+$sql5 = "SELECT  * FROM orang_hilang WHERE pelapor = '".$id_user."' AND NOT Visible = '0'";
+$result5 = $conn->query($sql5);
+$countNotif = 0;
+if ($result5->num_rows > 0) {
+  // output data of each row
+  while ($row5 = $result5->fetch_assoc()) {
+    $countNotif++;
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +41,21 @@ $result = $conn->query($sql1);
     <link rel="stylesheet" href="main-page.css" />
     <title>ORANG HILANG</title>
   </head>
+  <style>
+    .icon-button__badge {
+      position: absolute;
+      top: -4px;
+      right: 5px;
+      width: 15px;
+      height: 15px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+  </style>
   <body>
     <nav class="navbar">
       <div class="nav-wrapper">
@@ -39,6 +64,8 @@ $result = $conn->query($sql1);
           <a href="main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
           <a href="page-tambah-laporan.php?user=<?php echo $user; ?>"><img src="img/add.PNG"class="icon"/></a>
           <a href="user-notif.php?user=<?php echo $user ?>"><img src="img/notif.png" class="icon" alt="" /></a>
+          <!-- <span class="icon-button__badge"><?php echo $countNotif;?></span> -->
+          <span class="icon-button__badge"><?php echo $countNotif;?></span>
           <?php
             $sql4 = "SELECT * FROM users WHERE username = '".$user."'";
             $result4 = $conn->query($sql4);

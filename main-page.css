@@ -142,6 +142,8 @@
   display: grid;
   grid-template-columns: 60% 40%;
   grid-gap: 30px;
+  padding-top: 25px
+  
 }
 
 .left-col {
@@ -421,4 +423,17 @@ body {
 
 .reaction-wrapper .icon.save {
   margin-left: auto;
+}
+.icon-button__badge {
+  position: absolute;
+  top: -4px;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }

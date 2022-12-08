@@ -16,6 +16,16 @@ $sql1 = "SELECT  * FROM orang_hilang WHERE No_Identitas = '".$_GET["id_hilang"].
 
 $result = $conn->query($sql1);
 
+$sql5 = "SELECT  * FROM orang_hilang WHERE Visible = '0'";
+$result5 = $conn->query($sql5);
+$countNotif = 0;
+if ($result5->num_rows > 0) {
+  // output data of each row
+  while ($row5 = $result5->fetch_assoc()) {
+    $countNotif++;
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +117,7 @@ $result = $conn->query($sql1);
         <div class="nav-items">
         <a href="polisi-main-page.php"><img src="img/home.PNG" class="icon" alt="" /></a>
             <a href="polisi-page-notif.php"><img src="img/notif.png" class="icon" alt="" /></a>
-          <span class="icon-button__badge">1</span>
+          <span class="icon-button__badge"><?php echo $countNotif;?></span>
           <?php
             $sql4 = "SELECT * FROM missing_person_unit WHERE username = '".$user."'";
             $result4 = $conn->query($sql4);

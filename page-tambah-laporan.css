@@ -406,3 +406,17 @@ form h3 {
   line-height: 42px;
   text-align: center;
 }
+
+.icon-button__badge {
+  position: absolute;
+  top: -4px;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
